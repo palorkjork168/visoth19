@@ -52,39 +52,33 @@ export function ProjectDetailPage({
   return (
     <article
       className={`relative min-h-screen pt-24 sm:pt-28 pb-20 px-6 sm:px-10 lg:px-14 overflow-hidden transition-colors duration-500 ${
-        isAuraActive ? 'bg-[#0A0D12] text-slate-100' : 'bg-[#EFF4F5] text-zinc-900'
+        isAuraActive ? 'bg-[#0B0C10] text-slate-100' : 'bg-white text-zinc-900'
       }`}
     >
-      {/* ─── Topographic Map Background Contours ─── */}
-      <svg
-        className={`absolute inset-0 w-full h-full pointer-events-none transition-opacity duration-500 ${
-          isAuraActive ? 'opacity-[0.05] stroke-orange-400' : 'opacity-[0.16] stroke-teal-900'
+      {/* ─── Original Clean Subtle Ambient Glow (Matches our Portfolio Identity) ─── */}
+      <div
+        className={`absolute top-20 left-1/4 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none transition-all duration-700 ${
+          isAuraActive ? 'bg-[#FF5500]/12 opacity-80' : 'bg-[#FF5500]/5 opacity-60'
         }`}
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        strokeWidth="1.2"
-      >
-        <path d="M-100 200 C 300 120, 500 350, 900 180 C 1300 20, 1600 300, 2000 150" />
-        <path d="M-100 320 C 250 240, 600 480, 1000 280 C 1400 100, 1700 420, 2100 280" />
-        <path d="M-100 460 C 350 400, 700 620, 1100 420 C 1500 220, 1800 540, 2200 400" />
-        <path d="M-100 600 C 400 520, 800 740, 1200 560 C 1600 360, 1900 680, 2300 540" />
-        <path d="M-100 750 C 450 680, 900 880, 1300 700 C 1700 500, 2000 820, 2400 680" />
-        <circle cx="850" cy="380" r="160" strokeDasharray="3 3" />
-        <circle cx="850" cy="380" r="280" strokeDasharray="5 5" />
-      </svg>
+      />
+      <div
+        className={`absolute bottom-20 right-10 w-[400px] h-[400px] rounded-full blur-[120px] pointer-events-none transition-all duration-700 ${
+          isAuraActive ? 'bg-orange-600/10 opacity-70' : 'bg-zinc-200/50 opacity-40'
+        }`}
+      />
 
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* ─── Top Return Bar ─── */}
-        <div className="flex items-center justify-between mb-8 pb-3 border-b border-zinc-300/60 dark:border-zinc-800">
+        <div className="flex items-center justify-between mb-8 pb-3 border-b border-zinc-200/80 dark:border-zinc-800">
           <button
             onClick={onBack}
             className={`group inline-flex items-center gap-2 text-xs font-mono font-bold tracking-wider uppercase transition-colors cursor-pointer ${
               isAuraActive
                 ? 'text-zinc-400 hover:text-[#FF5500]'
-                : 'text-zinc-600 hover:text-[#007D8B]'
+                : 'text-zinc-600 hover:text-[#FF5500]'
             }`}
           >
-            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1 text-[#FF5500]" />
             <span>Back to All Projects</span>
           </button>
 
@@ -94,12 +88,12 @@ export function ProjectDetailPage({
         </div>
 
         {/* ─── Hero Section: Left Text + Right Chamfered Image ─── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-14 lg:mb-18">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center mb-14 lg:mb-18">
           {/* Left Column: Meta, Giant Title, Short Info, Tech Stack, and CTA */}
           <div className="lg:col-span-7 flex flex-col items-start space-y-5">
             {/* Meta Category Tag */}
             <div className="flex items-center gap-2 font-mono text-[11px] font-semibold tracking-widest uppercase text-zinc-500 dark:text-zinc-400">
-              <span className={isAuraActive ? 'text-[#FF5500]' : 'text-[#007D8B]'}>—</span>
+              <span className="text-[#FF5500] font-bold">—</span>
               <span>{project.category.toUpperCase()}</span>
               <span>·</span>
               <span>{leadTech.toUpperCase()}</span>
@@ -115,13 +109,7 @@ export function ProjectDetailPage({
               <span className={`block ${isAuraActive ? 'text-white' : 'text-zinc-950'}`}>
                 {titleLine1}
               </span>
-              <span
-                className={`block ${
-                  isAuraActive
-                    ? 'text-[#FF5500] drop-shadow-[0_2px_18px_rgba(255,85,0,0.35)]'
-                    : 'text-[#007D8B]'
-                }`}
-              >
+              <span className="block text-[#FF5500] drop-shadow-[0_2px_18px_rgba(255,85,0,0.35)]">
                 {titleLine2}
               </span>
             </h1>
@@ -142,8 +130,8 @@ export function ProjectDetailPage({
                   key={technology}
                   className={`font-mono text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 border transition-colors ${
                     isAuraActive
-                      ? 'bg-zinc-900/80 text-zinc-300 border-zinc-700/80 hover:border-[#FF5500]/60'
-                      : 'bg-white/80 text-zinc-700 border-zinc-300/80 shadow-2xs'
+                      ? 'bg-zinc-900/80 text-zinc-300 border-zinc-800 hover:border-[#FF5500]/60'
+                      : 'bg-zinc-50 text-zinc-800 border-zinc-200 hover:border-zinc-300 shadow-2xs'
                   }`}
                 >
                   {technology}
@@ -151,18 +139,14 @@ export function ProjectDetailPage({
               ))}
             </div>
 
-            {/* Action Buttons (Live Site + GitHub) */}
+            {/* Action Buttons (Our Signature Electric Orange + Dark Minimal) */}
             <div className="flex flex-wrap items-center gap-3 pt-2">
               {project.liveDemo && (
                 <a
                   href={project.liveDemo}
                   target="_blank"
                   rel="noreferrer"
-                  className={`inline-flex items-center gap-2 px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-sm transition-all cursor-pointer active:scale-95 ${
-                    isAuraActive
-                      ? 'bg-[#FF5500] hover:bg-[#E04B00] shadow-[0_0_20px_rgba(255,85,0,0.4)]'
-                      : 'bg-[#007D8B] hover:bg-[#006672]'
-                  }`}
+                  className="inline-flex items-center gap-2 px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider text-white bg-[#FF5500] hover:bg-[#E04B00] shadow-[0_4px_18px_rgba(255,85,0,0.3)] transition-all cursor-pointer active:scale-95"
                 >
                   <span>LIVE SITE</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -175,8 +159,8 @@ export function ProjectDetailPage({
                 rel="noreferrer"
                 className={`inline-flex items-center gap-2 px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider border transition-all cursor-pointer active:scale-95 ${
                   isAuraActive
-                    ? 'border-zinc-700 bg-zinc-900/70 hover:bg-zinc-800 text-white'
-                    : 'border-zinc-400/80 bg-white/70 hover:bg-zinc-100 text-zinc-900 shadow-2xs'
+                    ? 'border-zinc-800 bg-zinc-900/70 hover:bg-zinc-800 text-white hover:border-zinc-700'
+                    : 'border-zinc-300 bg-white hover:bg-zinc-50 text-zinc-900 shadow-2xs hover:border-zinc-400'
                 }`}
               >
                 <span>GITHUB REPO</span>
@@ -190,8 +174,8 @@ export function ProjectDetailPage({
             <div
               className={`relative w-full rounded-2xl overflow-hidden transition-all duration-300 ${
                 isAuraActive
-                  ? 'shadow-[0_16px_40px_rgba(0,0,0,0.85)] border border-zinc-800'
-                  : 'shadow-lg border border-zinc-300/80'
+                  ? 'shadow-[0_16px_40px_rgba(0,0,0,0.85)] border border-zinc-800 hover:border-[#FF5500]/40'
+                  : 'shadow-lg border border-zinc-200 hover:border-zinc-400'
               }`}
               style={{
                 clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%)',
@@ -217,10 +201,8 @@ export function ProjectDetailPage({
                       onClick={() => setSelectedImage(imgSrc)}
                       className={`relative w-16 sm:w-20 h-12 rounded-lg overflow-hidden border-2 transition-all cursor-pointer flex-shrink-0 ${
                         isSelected
-                          ? isAuraActive
-                            ? 'border-[#FF5500] scale-105 shadow-[0_0_10px_rgba(255,85,0,0.4)]'
-                            : 'border-[#007D8B] scale-105 shadow-sm'
-                          : 'border-zinc-300/60 dark:border-zinc-800 opacity-60 hover:opacity-100'
+                          ? 'border-[#FF5500] scale-105 shadow-[0_0_12px_rgba(255,85,0,0.4)]'
+                          : 'border-zinc-200 dark:border-zinc-800 opacity-60 hover:opacity-100'
                       }`}
                     >
                       <img src={imgSrc} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
@@ -232,8 +214,8 @@ export function ProjectDetailPage({
           </div>
         </div>
 
-        {/* ─── Bottom Metrics Section with Corner Brackets (HUD Tech aesthetic) ─── */}
-        <div className="pt-8 border-t border-zinc-300/60 dark:border-zinc-800/80">
+        {/* ─── Bottom Metrics Section with Corner Brackets (HUD Tech aesthetic in our #FF5500 brand color) ─── */}
+        <div className="pt-8 border-t border-zinc-200/80 dark:border-zinc-800/80">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {metrics.map((metric, idx) => (
               <div
@@ -245,7 +227,7 @@ export function ProjectDetailPage({
                   className={`absolute top-0 left-0 w-3 h-3 border-t-[1.5px] border-l-[1.5px] transition-colors ${
                     isAuraActive
                       ? 'border-zinc-500 group-hover:border-[#FF5500]'
-                      : 'border-zinc-800 group-hover:border-[#007D8B]'
+                      : 'border-zinc-800 group-hover:border-[#FF5500]'
                   }`}
                 />
                 {/* ⌝ Top-Right Bracket */}
@@ -253,7 +235,7 @@ export function ProjectDetailPage({
                   className={`absolute top-0 right-0 w-3 h-3 border-t-[1.5px] border-r-[1.5px] transition-colors ${
                     isAuraActive
                       ? 'border-zinc-500 group-hover:border-[#FF5500]'
-                      : 'border-zinc-800 group-hover:border-[#007D8B]'
+                      : 'border-zinc-800 group-hover:border-[#FF5500]'
                   }`}
                 />
                 {/* ⌞ Bottom-Left Bracket */}
@@ -261,7 +243,7 @@ export function ProjectDetailPage({
                   className={`absolute bottom-0 left-0 w-3 h-3 border-b-[1.5px] border-l-[1.5px] transition-colors ${
                     isAuraActive
                       ? 'border-zinc-500 group-hover:border-[#FF5500]'
-                      : 'border-zinc-800 group-hover:border-[#007D8B]'
+                      : 'border-zinc-800 group-hover:border-[#FF5500]'
                   }`}
                 />
                 {/* ⌟ Bottom-Right Bracket */}
@@ -269,15 +251,13 @@ export function ProjectDetailPage({
                   className={`absolute bottom-0 right-0 w-3 h-3 border-b-[1.5px] border-r-[1.5px] transition-colors ${
                     isAuraActive
                       ? 'border-zinc-500 group-hover:border-[#FF5500]'
-                      : 'border-zinc-800 group-hover:border-[#007D8B]'
+                      : 'border-zinc-800 group-hover:border-[#FF5500]'
                   }`}
                 />
 
-                {/* Big Bold Stat / Number */}
+                {/* Big Bold Stat / Number in our Electric Orange */}
                 <div
-                  className={`font-heading font-black text-5xl sm:text-6xl lg:text-7xl leading-none mb-3 transition-colors ${
-                    isAuraActive ? 'text-[#FF5500]' : 'text-[#007D8B]'
-                  }`}
+                  className="font-heading font-black text-5xl sm:text-6xl lg:text-7xl leading-none mb-3 text-[#FF5500] drop-shadow-[0_2px_14px_rgba(255,85,0,0.25)]"
                   style={{ fontStretch: '75%' }}
                 >
                   {metric.value}
@@ -297,7 +277,7 @@ export function ProjectDetailPage({
         </div>
 
         {/* ─── Bottom Navigation: Previous / Next Project ─── */}
-        <div className="mt-14 pt-6 border-t border-zinc-300/60 dark:border-zinc-800 flex items-center justify-between font-mono text-xs">
+        <div className="mt-14 pt-6 border-t border-zinc-200/80 dark:border-zinc-800 flex items-center justify-between font-mono text-xs">
           {prevProject ? (
             <button
               onClick={() => onSelectProject(prevProject.id)}
