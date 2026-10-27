@@ -42,7 +42,7 @@ export function HeroSection({ isAuraActive, onAuraToggle, onOpenResume }: HeroSe
       <div className="h-16 sm:h-20 w-full shrink-0 pointer-events-none" />
 
       {/* ─── Hero Canvas with Expanded Breathing Room (Name far left, Portrait center, Features far right) ─── */}
-      <div className="relative w-full max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-12 xl:px-16 my-auto flex flex-col lg:flex-row items-center justify-between min-h-[640px] lg:min-h-[760px] xl:min-h-[820px] gap-8">
+      <div className="relative w-full max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-12 xl:px-16 my-auto flex flex-col lg:flex-row items-center justify-between min-h-[640px] lg:min-h-[780px] xl:min-h-[860px] 2xl:min-h-[920px] gap-8">
         
         {/* ─── LEFT: Big Bold Full Name "CHOU SEREYVISOTH" + Dynamic Animated Title (Pushed Left) ─── */}
         <div className="relative z-10 flex flex-col justify-center max-w-md lg:max-w-lg xl:max-w-xl pointer-events-none select-none order-2 lg:order-1 lg:pl-2 xl:pl-4">
@@ -89,12 +89,12 @@ export function HeroSection({ isAuraActive, onAuraToggle, onOpenResume }: HeroSe
           </div>
         </div>
 
-        {/* ─── CENTER: Portrait Stage + Realistic Back Shadow + WebGL Liquid Reveal (Anchored Center) ─── */}
-        <div className="relative lg:absolute left-1/2 lg:-translate-x-1/2 bottom-0 w-[380px] sm:w-[520px] md:w-[640px] lg:w-[760px] xl:w-[860px] h-[520px] sm:h-[600px] md:h-[680px] lg:h-[760px] xl:h-[820px] flex items-end justify-center z-20 pointer-events-none order-1 lg:order-2">
+        {/* ─── CENTER: Portrait Stage + Realistic Back Shadow + WebGL Liquid Reveal (Enlarged Commanding Portrait) ─── */}
+        <div className="relative lg:absolute left-1/2 lg:-translate-x-1/2 bottom-0 w-[420px] sm:w-[580px] md:w-[720px] lg:w-[900px] xl:w-[1040px] 2xl:w-[1160px] h-[560px] sm:h-[660px] md:h-[760px] lg:h-[860px] xl:h-[930px] 2xl:h-[980px] flex items-end justify-center z-20 pointer-events-none order-1 lg:order-2">
           
           {/* 1. Deep Silhouette Back Shadow & Ambient Hellfire Bloom */}
           <div
-            className={`absolute left-1/2 -translate-x-1/2 bottom-4 w-[320px] sm:w-[460px] md:w-[560px] lg:w-[660px] h-[400px] sm:h-[500px] rounded-full pointer-events-none transition-all duration-700 blur-[80px] ${
+            className={`absolute left-1/2 -translate-x-1/2 bottom-4 w-[360px] sm:w-[500px] md:w-[640px] lg:w-[780px] xl:w-[880px] h-[440px] sm:h-[540px] lg:h-[660px] xl:h-[740px] rounded-full pointer-events-none transition-all duration-700 blur-[90px] ${
               isFullAura
                 ? 'bg-gradient-to-t from-[#FF2200]/90 via-[#FF7700]/70 to-[#FFAA00]/50 scale-125 opacity-100'
                 : 'bg-black/35 opacity-50 scale-100'
