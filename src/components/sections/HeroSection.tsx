@@ -6,6 +6,7 @@ import { Aura3DButton } from '../ui/Aura3DButton';
 import { FloatingFireEmbers } from '../ui/FloatingFireEmbers';
 import { LensFlareOverlay } from '../ui/LensFlareOverlay';
 import { HellfireFlamesLayer } from '../ui/HellfireFlamesLayer';
+import { DynamicGridWaveCanvas } from '../ui/DynamicGridWaveCanvas';
 import normalImg from '../../assets/profile/user_normal_hero.png';
 import ghostImg from '../../assets/profile/user_ghost_hero.png';
 
@@ -32,6 +33,9 @@ export function HeroSection({ isAuraActive, onAuraToggle, onOpenResume }: HeroSe
         isFullAura ? 'bg-[#0A0B10]' : 'bg-white'
       }`}
     >
+      {/* ─── Dynamic Wavy Grid with Interactive Cursor Repulsion & Glow ─── */}
+      <DynamicGridWaveCanvas isAuraActive={isFullAura} />
+
       {/* ─── Floating Fire Embers Particle Canvas ─── */}
       <FloatingFireEmbers isAuraActive={isFullAura} />
 

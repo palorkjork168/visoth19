@@ -1,10 +1,3 @@
-import proj1 from '../assets/projects/project1.jpg';
-import proj2 from '../assets/projects/project2.jpg';
-import proj3 from '../assets/projects/project3.jpg';
-import cinemaImg from '../assets/projects/cinema_mgmt.jpg';
-import hotelImg from '../assets/projects/hotel_mgmt.jpg';
-import schoolImg from '../assets/projects/school_mgmt.jpg';
-
 // User-Provided Project Photos & Assets
 import qrHomeImg from '../assets/projects/qr-generator/homePage.png';
 import qrOptionsImg from '../assets/projects/qr-generator/options.png';
@@ -31,7 +24,7 @@ export interface ProjectItem {
   shortDesc: string;
   desc: string;
   tech: string[];
-  image: string;
+  image?: string;
   gallery?: string[];
   link: string;
   liveDemo?: string;
@@ -68,7 +61,7 @@ export const allProjects: ProjectItem[] = [
       'PostgreSQL data layer for saving and managing multiple resume versions',
       'Print & PDF export-ready styling for application submissions',
     ],
-    image: proj2,
+    image: '',
     link: 'https://github.com/palorkjork168',
   },
   {
@@ -157,7 +150,7 @@ export const allProjects: ProjectItem[] = [
       'TanStack React Query integration for background data syncing and caching',
       'Sequelize ORM data layer ensuring relational database consistency',
     ],
-    image: proj3,
+    image: '',
     link: 'https://github.com/palorkjork168',
   },
   {
@@ -185,7 +178,7 @@ export const allProjects: ProjectItem[] = [
       'Visual sales analytics and revenue charts using Recharts',
       'Receipt generation and cashier shift transaction summaries',
     ],
-    image: proj1,
+    image: '',
     link: 'https://github.com/palorkjork168',
   },
   {
@@ -213,7 +206,7 @@ export const allProjects: ProjectItem[] = [
       'Daily attendance tracking for classes and subject periods',
       'Multi-level authorization ensuring confidential student record protection',
     ],
-    image: schoolImg,
+    image: '',
     link: 'https://github.com/palorkjork168',
   },
   {
@@ -241,7 +234,7 @@ export const allProjects: ProjectItem[] = [
       'Interactive visual seat selection grid with live booking state',
       'Digital ticket confirmation and customer booking summaries',
     ],
-    image: cinemaImg,
+    image: '',
     link: 'https://github.com/palorkjork168',
   },
   {
@@ -269,7 +262,7 @@ export const allProjects: ProjectItem[] = [
       'Streamlined front-desk check-in and check-out processing',
       'Billing statements and invoice calculation per stay duration',
     ],
-    image: hotelImg,
+    image: '',
     link: 'https://github.com/palorkjork168',
   },
 ];

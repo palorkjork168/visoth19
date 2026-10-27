@@ -20,6 +20,8 @@ import { Navbar } from './components/ui/Navbar';
 import { allProjects } from './data/projects';
 import { ProjectDetailPage } from './components/pages/ProjectDetailPage';
 import { RevealOnScroll } from './components/ui/RevealOnScroll';
+import { ProjectPreviewPlaceholder } from './components/ui/ProjectPreviewPlaceholder';
+import { DynamicGridWaveCanvas } from './components/ui/DynamicGridWaveCanvas';
 
 // ─── Precision Social SVG Icons ─────────────────────────────────────
 function GithubIcon({ className = 'w-4 h-4' }: { className?: string }) {
@@ -328,12 +330,16 @@ export default function App() {
       {/* ─── 4. PROJECTS SECTION WITH MAGIC BENTO ─── */}
       <section
         id="projects"
-        className={`w-full py-24 sm:py-32 px-5 sm:px-8 transition-colors duration-500 border-t relative ${
+        className={`w-full py-24 sm:py-32 px-5 sm:px-8 transition-colors duration-500 border-t relative overflow-hidden ${
           isAuraGlobal ? 'bg-[#0E0F14] border-zinc-800' : 'bg-zinc-50 border-zinc-200'
         }`}
       >
         <span id="courses" className="absolute -top-24 sr-only" />
-        <div className="max-w-6xl mx-auto">
+
+        {/* Subtle Ambient Wavy Grid Background */}
+        <DynamicGridWaveCanvas isAuraActive={isAuraGlobal} opacity={0.85} />
+
+        <div className="max-w-6xl mx-auto relative z-10">
           {/* Section Header */}
           <RevealOnScroll direction="up" delay={40}>
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
@@ -375,13 +381,22 @@ export default function App() {
                       : 'bg-white border-zinc-200 shadow-sm hover:border-zinc-300'
                   }`}
                 >
-                  {/* Image Cover (Clean & Unobstructed, no badges/buttons on top) */}
+                  {/* Image Cover or Sleek Coming Soon Placeholder */}
                   <div className="relative aspect-[16/10] overflow-hidden bg-zinc-100 dark:bg-zinc-800 group">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
+                    {project.image ? (
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    ) : (
+                      <ProjectPreviewPlaceholder
+                        title={project.title}
+                        category={project.category}
+                        isAuraActive={isAuraGlobal}
+                        variant="card"
+                      />
+                    )}
                   </div>
 
                   {/* Content */}

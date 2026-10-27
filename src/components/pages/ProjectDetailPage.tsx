@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react';
 import { ProjectItem, allProjects } from '../../data/projects';
+import { ProjectPreviewPlaceholder } from '../ui/ProjectPreviewPlaceholder';
+import { DynamicGridWaveCanvas } from '../ui/DynamicGridWaveCanvas';
 
 interface ProjectDetailPageProps {
   project: ProjectItem;
@@ -23,11 +25,11 @@ export function ProjectDetailPage({
   onBack,
   onSelectProject,
 }: ProjectDetailPageProps) {
-  const [selectedImage, setSelectedImage] = useState<string>(project.image);
+  const [selectedImage, setSelectedImage] = useState<string>(project.image || '');
 
   // Sync selected image if project changes
   useEffect(() => {
-    setSelectedImage(project.image);
+    setSelectedImage(project.image || '');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [project.id]);
 
@@ -55,6 +57,9 @@ export function ProjectDetailPage({
         isAuraActive ? 'bg-[#0B0C10] text-slate-100' : 'bg-white text-zinc-900'
       }`}
     >
+      {/* ─── Ambient Wavy Grid Background ─── */}
+      <DynamicGridWaveCanvas isAuraActive={isAuraActive} opacity={0.8} />
+
       {/* ─── Original Clean Subtle Ambient Glow (Matches our Portfolio Identity) ─── */}
       <div
         className={`absolute top-20 left-1/4 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none transition-all duration-700 ${
@@ -182,11 +187,20 @@ export function ProjectDetailPage({
               }}
             >
               <div className="aspect-[4/3] w-full bg-zinc-950 overflow-hidden">
-                <img
-                  src={selectedImage}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                />
+                {selectedImage ? (
+                  <img
+                    src={selectedImage}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                ) : (
+                  <ProjectPreviewPlaceholder
+                    title={project.title}
+                    category={project.category}
+                    isAuraActive={isAuraActive}
+                    variant="detail"
+                  />
+                )}
               </div>
             </div>
 
