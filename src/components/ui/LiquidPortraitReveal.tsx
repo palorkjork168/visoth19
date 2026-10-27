@@ -282,7 +282,7 @@ export function LiquidPortraitReveal({
       let lastTime = performance.now();
       let startTime = performance.now();
       let targetProgress = isAltActive ? 0.0 : 1.0;
-      let transitionSpeed = 0.85; // Fast, punchy liquid burn transformation (within 0.8s)
+      let transitionSpeed = 0.55; // Snappy ~0.5s liquid burn transformation
 
       const loop = (now: number) => {
         const dt = Math.min((now - lastTime) / 1000, 0.05);
@@ -332,7 +332,7 @@ export function LiquidPortraitReveal({
       controllerRef.current = {
         show(mode: 'photo' | 'alt') {
           targetProgress = mode === 'alt' ? 0.0 : 1.0;
-          transitionSpeed = 1.1;
+          transitionSpeed = 0.55;
           kick();
         },
         destroy() {

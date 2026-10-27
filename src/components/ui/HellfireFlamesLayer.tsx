@@ -37,12 +37,12 @@ export function HellfireFlamesLayer({
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [shouldRender, setShouldRender] = useState(isAuraActive);
 
-  // Keep canvas rendering during smooth 800ms fade-out
+  // Keep canvas rendering during smooth 500ms fade-out
   useEffect(() => {
     if (isAuraActive) {
       setShouldRender(true);
     } else {
-      const timer = setTimeout(() => setShouldRender(false), 800);
+      const timer = setTimeout(() => setShouldRender(false), 550);
       return () => clearTimeout(timer);
     }
   }, [isAuraActive]);
@@ -233,7 +233,7 @@ export function HellfireFlamesLayer({
   return (
     <canvas
       ref={canvasRef}
-      className={`absolute inset-0 w-full h-full pointer-events-none transition-opacity duration-700 ease-out ${
+      className={`absolute inset-0 w-full h-full pointer-events-none transition-opacity duration-500 ease-out ${
         isAuraActive ? 'opacity-100' : 'opacity-0'
       } ${className}`}
       style={{

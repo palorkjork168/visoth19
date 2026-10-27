@@ -28,7 +28,7 @@ export function HeroSection({ isAuraActive, onAuraToggle, onOpenResume }: HeroSe
   return (
     <section
       id="home"
-      className={`relative min-h-screen w-full flex flex-col justify-between overflow-hidden pt-4 pb-8 select-none transition-colors duration-700 ${
+      className={`relative min-h-screen w-full flex flex-col justify-between overflow-hidden pt-4 pb-8 select-none transition-colors duration-500 ${
         isFullAura ? 'bg-[#0A0B10]' : 'bg-white'
       }`}
     >

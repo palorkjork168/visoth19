@@ -52,11 +52,11 @@ export default function App() {
   const [isAuraGlobal, setIsAuraGlobal] = useState(true);
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
-  // Play opening transformation intro (from Ghost Rider to Normal mode) within 0.75s
+  // Play opening transformation intro (from Ghost Rider to Normal mode) within 0.5s - 0.75s
   useEffect(() => {
     const introTimer = setTimeout(() => {
       setIsAuraGlobal(false);
-    }, 750); // 0.75s teaser in Ghost Rider mode before the liquid burn transformation
+    }, 450); // Snappy ~0.45s teaser before smoothly transforming into normal mode
 
     return () => clearTimeout(introTimer);
   }, []);
@@ -158,7 +158,7 @@ export default function App() {
 
   return (
     <div
-      className={`min-h-screen transition-colors duration-700 ${
+      className={`min-h-screen transition-colors duration-500 ${
         isAuraGlobal ? 'bg-[#0B0C10] text-slate-100' : 'bg-white text-zinc-900'
       } font-sans antialiased`}
     >
