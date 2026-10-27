@@ -74,6 +74,14 @@ export function Aura3DButton({ isAuraActive, onToggle, className = '' }: Aura3DB
         }`}
       />
 
+      {/* ─── Beacon Indicator to Re-ignite Ghost Rider Mode ─── */}
+      {!isAuraActive && (
+        <span className="absolute -top-1.5 -right-1.5 flex h-3.5 w-3.5 pointer-events-none z-20" title="Click to Ignite Ghost Rider">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF5500] opacity-75" />
+          <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-[#FF5500] shadow-[0_0_8px_#FF5500]" />
+        </span>
+      )}
+
       {/* ─── Rotating Conic Gradient Outer Border ─── */}
       <div
         className={`relative p-[2px] rounded-2xl transition-all duration-500 ${

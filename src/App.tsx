@@ -47,8 +47,18 @@ function TelegramIcon({ className = 'w-4 h-4' }: { className?: string }) {
 
 export default function App() {
   const [copiedEmail, setCopiedEmail] = useState(false);
-  const [isAuraGlobal, setIsAuraGlobal] = useState(false);
+  // Opening Intro Reveal: starts in Ghost Rider mode, then smoothly burns/transforms into normal mode!
+  const [isAuraGlobal, setIsAuraGlobal] = useState(true);
   const [isResumeOpen, setIsResumeOpen] = useState(false);
+
+  // Play opening transformation intro (from Ghost Rider to Normal mode) on initial open or refresh
+  useEffect(() => {
+    const introTimer = setTimeout(() => {
+      setIsAuraGlobal(false);
+    }, 1400); // 1.4s teaser in Ghost Rider mode before the liquid burn transformation
+
+    return () => clearTimeout(introTimer);
+  }, []);
 
   // URL Hash-based Routing for Project Detail Pages (e.g. #/project/cv-builder)
   const [currentProjectId, setCurrentProjectId] = useState<string | null>(() => {

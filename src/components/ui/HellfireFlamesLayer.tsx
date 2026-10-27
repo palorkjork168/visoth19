@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface HellfireFlamesLayerProps {
   mode: 'back' | 'front';
@@ -35,9 +35,20 @@ export function HellfireFlamesLayer({
   className = '',
 }: HellfireFlamesLayerProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [shouldRender, setShouldRender] = useState(isAuraActive);
+
+  // Keep canvas rendering during smooth 800ms fade-out
+  useEffect(() => {
+    if (isAuraActive) {
+      setShouldRender(true);
+    } else {
+      const timer = setTimeout(() => setShouldRender(false), 800);
+      return () => clearTimeout(timer);
+    }
+  }, [isAuraActive]);
 
   useEffect(() => {
-    if (!isAuraActive) return;
+    if (!shouldRender) return;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -215,14 +226,16 @@ export function HellfireFlamesLayer({
       cancelAnimationFrame(animId);
       window.removeEventListener('resize', resize);
     };
-  }, [isAuraActive, mode]);
+  }, [shouldRender, mode]);
 
-  if (!isAuraActive) return null;
+  if (!shouldRender) return null;
 
   return (
     <canvas
       ref={canvasRef}
-      className={`absolute inset-0 w-full h-full pointer-events-none ${className}`}
+      className={`absolute inset-0 w-full h-full pointer-events-none transition-opacity duration-700 ease-out ${
+        isAuraActive ? 'opacity-100' : 'opacity-0'
+      } ${className}`}
       style={{
         mixBlendMode: 'screen',
         filter: mode === 'back' ? 'blur(4px)' : 'blur(2px)', // Soft organic fluid fire blending
