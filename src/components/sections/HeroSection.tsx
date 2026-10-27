@@ -41,13 +41,13 @@ export function HeroSection({ isAuraActive, onAuraToggle, onOpenResume }: HeroSe
       {/* Top spacing buffer for global floating pill navbar */}
       <div className="h-16 sm:h-20 w-full shrink-0 pointer-events-none" />
 
-      {/* ─── Hero Canvas matching normal.jpg composition ─── */}
-      <div className="relative w-full max-w-7xl mx-auto px-5 sm:px-8 my-auto flex flex-col lg:flex-row items-center justify-between min-h-[640px] lg:min-h-[760px] xl:min-h-[820px] gap-8">
+      {/* ─── Hero Canvas with Expanded Breathing Room (Name far left, Portrait center, Features far right) ─── */}
+      <div className="relative w-full max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-12 xl:px-16 my-auto flex flex-col lg:flex-row items-center justify-between min-h-[640px] lg:min-h-[760px] xl:min-h-[820px] gap-8">
         
-        {/* ─── LEFT: Big Bold Full Name "CHOU SEREYVISOTH" + Dynamic Animated Title ─── */}
-        <div className="relative z-10 flex flex-col justify-center max-w-md lg:max-w-xl pointer-events-none select-none order-2 lg:order-1">
+        {/* ─── LEFT: Big Bold Full Name "CHOU SEREYVISOTH" + Dynamic Animated Title (Pushed Left) ─── */}
+        <div className="relative z-10 flex flex-col justify-center max-w-md lg:max-w-lg xl:max-w-xl pointer-events-none select-none order-2 lg:order-1 lg:pl-2 xl:pl-4">
           <div
-            className={`font-heading font-black tracking-tighter text-[clamp(3.8rem,9vw,9.5rem)] leading-[0.82] transition-colors duration-500 ${
+            className={`font-heading font-black tracking-tighter text-[clamp(3.5rem,7.5vw,8.5rem)] leading-[0.84] transition-colors duration-500 ${
               isFullAura ? 'text-white' : 'text-black'
             }`}
           >
@@ -89,8 +89,8 @@ export function HeroSection({ isAuraActive, onAuraToggle, onOpenResume }: HeroSe
           </div>
         </div>
 
-        {/* ─── CENTER: Portrait Stage + Realistic Back Shadow + WebGL Liquid Reveal ─── */}
-        <div className="relative lg:absolute left-1/2 lg:-translate-x-1/2 bottom-0 w-[380px] sm:w-[540px] md:w-[680px] lg:w-[820px] xl:w-[920px] h-[520px] sm:h-[620px] md:h-[700px] lg:h-[780px] xl:h-[840px] flex items-end justify-center z-20 pointer-events-none order-1 lg:order-2">
+        {/* ─── CENTER: Portrait Stage + Realistic Back Shadow + WebGL Liquid Reveal (Anchored Center) ─── */}
+        <div className="relative lg:absolute left-1/2 lg:-translate-x-1/2 bottom-0 w-[380px] sm:w-[520px] md:w-[640px] lg:w-[760px] xl:w-[860px] h-[520px] sm:h-[600px] md:h-[680px] lg:h-[760px] xl:h-[820px] flex items-end justify-center z-20 pointer-events-none order-1 lg:order-2">
           
           {/* 1. Deep Silhouette Back Shadow & Ambient Hellfire Bloom */}
           <div
@@ -125,8 +125,8 @@ export function HeroSection({ isAuraActive, onAuraToggle, onOpenResume }: HeroSe
           />
         </div>
 
-        {/* ─── RIGHT: Glassmorphic Project Highlights & 3D Aura Button ─── */}
-        <div className="relative z-30 flex flex-col items-start lg:items-end text-left lg:text-right font-mono select-none space-y-3.5 max-w-xs sm:max-w-sm order-3 pointer-events-auto">
+        {/* ─── RIGHT: Glassmorphic Project Highlights & 3D Aura Button (Pushed Right) ─── */}
+        <div className="relative z-30 flex flex-col items-start lg:items-end text-left lg:text-right font-mono select-none space-y-3.5 max-w-xs sm:max-w-sm order-3 pointer-events-auto lg:pr-2 xl:pr-4">
           
           {/* Latest project glassmorphic card */}
           <div
