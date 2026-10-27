@@ -45,28 +45,52 @@ export function HeroSection({ isAuraActive, onAuraToggle, onOpenResume }: HeroSe
       <div className="relative w-full max-w-7xl mx-auto px-5 sm:px-8 my-auto flex flex-col lg:flex-row items-center justify-between min-h-[640px] lg:min-h-[760px] xl:min-h-[820px] gap-8">
         
         {/* ─── LEFT: Big Bold Full Name "CHOU SEREYVISOTH" + Dynamic Animated Title ─── */}
-        <div className="relative z-20 flex flex-col justify-center max-w-md lg:max-w-xl pointer-events-none select-none order-2 lg:order-1">
+        <div className="relative z-10 flex flex-col justify-center max-w-md lg:max-w-xl pointer-events-none select-none order-2 lg:order-1">
           <div
             className={`font-heading font-black tracking-tighter text-[clamp(3.8rem,9vw,9.5rem)] leading-[0.82] transition-colors duration-500 ${
               isFullAura ? 'text-white' : 'text-black'
             }`}
           >
             <div className="tracking-tight hover:opacity-90 transition-opacity">CHOU</div>
-            <div className="tracking-tight hover:opacity-90 transition-opacity">SEREY</div>
+            <div className="tracking-tight hover:opacity-90 transition-opacity flex items-baseline">
+              <span>SERE</span>
+              <span
+                className="inline-block transition-all duration-300 select-none"
+                style={{
+                  WebkitTextStroke: isFullAura ? '2.5px #FFFFFF' : '2.5px #000000',
+                  WebkitTextFillColor: 'transparent',
+                  color: 'transparent',
+                }}
+              >
+                Y
+              </span>
+            </div>
             <div className="tracking-tight text-[#FF5500] flex items-center gap-2 sm:gap-3 drop-shadow-[0_2px_14px_rgba(255,85,0,0.35)]">
-              <span>VISOTH</span>
+              <span className="flex items-baseline">
+                <span>VISOT</span>
+                <span
+                  className="inline-block transition-all duration-300 select-none"
+                  style={{
+                    WebkitTextStroke: '2.5px #FF5500',
+                    WebkitTextFillColor: 'transparent',
+                    color: 'transparent',
+                  }}
+                >
+                  H
+                </span>
+              </span>
               <span className="inline-block w-3.5 h-3.5 sm:w-5 sm:h-5 rounded-full bg-[#FF5500] animate-pulse shadow-[0_0_15px_#FF5500]" />
             </div>
           </div>
 
-          {/* Dynamic Animated Typewriter Title */}
-          <div className="mt-8 pointer-events-auto">
+          {/* Dynamic Animated Typewriter Title (Kept at z-30 for pristine foreground legibility) */}
+          <div className="mt-8 pointer-events-auto relative z-30">
             <TypewriterTitle isAuraActive={isFullAura} />
           </div>
         </div>
 
         {/* ─── CENTER: Portrait Stage + Realistic Back Shadow + WebGL Liquid Reveal ─── */}
-        <div className="relative lg:absolute left-1/2 lg:-translate-x-1/2 bottom-0 w-[380px] sm:w-[540px] md:w-[680px] lg:w-[820px] xl:w-[920px] h-[520px] sm:h-[620px] md:h-[700px] lg:h-[780px] xl:h-[840px] flex items-end justify-center z-10 pointer-events-none order-1 lg:order-2">
+        <div className="relative lg:absolute left-1/2 lg:-translate-x-1/2 bottom-0 w-[380px] sm:w-[540px] md:w-[680px] lg:w-[820px] xl:w-[920px] h-[520px] sm:h-[620px] md:h-[700px] lg:h-[780px] xl:h-[840px] flex items-end justify-center z-20 pointer-events-none order-1 lg:order-2">
           
           {/* 1. Deep Silhouette Back Shadow & Ambient Hellfire Bloom */}
           <div
@@ -102,7 +126,7 @@ export function HeroSection({ isAuraActive, onAuraToggle, onOpenResume }: HeroSe
         </div>
 
         {/* ─── RIGHT: Glassmorphic Project Highlights & 3D Aura Button ─── */}
-        <div className="relative z-20 flex flex-col items-start lg:items-end text-left lg:text-right font-mono select-none space-y-3.5 max-w-xs sm:max-w-sm order-3">
+        <div className="relative z-30 flex flex-col items-start lg:items-end text-left lg:text-right font-mono select-none space-y-3.5 max-w-xs sm:max-w-sm order-3 pointer-events-auto">
           
           {/* Latest project glassmorphic card */}
           <div

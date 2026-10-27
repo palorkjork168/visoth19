@@ -7,80 +7,95 @@ interface TypewriterTitleProps {
 }
 
 const titles = [
-  'Junior Full-Stack Developer',
   'Software Developer',
   'Web Developer',
   'Ghost Rider',
 ];
 
 export function TypewriterTitle({ className = '', isAuraActive = false }: TypewriterTitleProps) {
-  const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
-  const [displayedText, setDisplayedText] = useState('');
+  const [index, setIndex] = useState(0);
+  const [subIndex, setSubIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [typingSpeed, setTypingSpeed] = useState(70);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    const fullText = titles[currentTitleIndex];
+    // 1. Pause when full word is typed so visitor has plenty of time to read
+    if (isPaused) {
+      const pauseTimer = setTimeout(() => {
+        setIsPaused(false);
+        setIsDeleting(true);
+      }, 3800); // comfortable 3.8s read time
+      return () => clearTimeout(pauseTimer);
+    }
 
-    const handleTyping = () => {
-      if (!isDeleting) {
-        // Typing forward
-        const nextText = fullText.slice(0, displayedText.length + 1);
-        setDisplayedText(nextText);
-        setTypingSpeed(55 + Math.random() * 30); // organic typing variation
-
-        if (nextText === fullText) {
-          // Pause when complete before deleting
-          setTimeout(() => setIsDeleting(true), 2200);
-        }
-      } else {
-        // Deleting backward
-        const nextText = fullText.slice(0, displayedText.length - 1);
-        setDisplayedText(nextText);
-        setTypingSpeed(30);
-
-        if (nextText === '') {
-          setIsDeleting(false);
-          setCurrentTitleIndex((prev) => (prev + 1) % titles.length);
-        }
+    // 2. Deleting characters smoothly
+    if (isDeleting) {
+      if (subIndex === 0) {
+        setIsDeleting(false);
+        setIndex((prev) => (prev + 1) % titles.length);
+        return;
       }
-    };
+      const deleteTimer = setTimeout(() => {
+        setSubIndex((prev) => prev - 1);
+      }, 35);
+      return () => clearTimeout(deleteTimer);
+    }
 
-    const timer = setTimeout(handleTyping, typingSpeed);
-    return () => clearTimeout(timer);
-  }, [displayedText, isDeleting, currentTitleIndex, typingSpeed]);
+    // 3. Typing characters forward with steady, fluid cadence
+    const currentWord = titles[index];
+    if (subIndex === currentWord.length) {
+      setIsPaused(true);
+      return;
+    }
+
+    const typeTimer = setTimeout(() => {
+      setSubIndex((prev) => prev + 1);
+    }, 75);
+    return () => clearTimeout(typeTimer);
+  }, [subIndex, isDeleting, isPaused, index]);
+
+  const displayedText = titles[index].substring(0, subIndex);
 
   return (
-    <div className={`flex flex-col gap-2 font-mono ${className}`}>
-      {/* Status indicator tag */}
+    <div className={`flex flex-col gap-2.5 font-mono ${className}`}>
+      {/* ─── Status Indicator Tag (Calm, elegant radar pulse) ─── */}
       <div className="flex items-center gap-2">
-        <span className="relative flex h-2 w-2">
-          <span
-            className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
-              isAuraActive ? 'bg-[#FF5500]' : 'bg-emerald-500'
-            }`}
-          />
-          <span
-            className={`relative inline-flex rounded-full h-2 w-2 ${
-              isAuraActive ? 'bg-[#FF5500]' : 'bg-emerald-600'
-            }`}
-          />
-        </span>
-        <span className="text-[11px] font-semibold tracking-wider uppercase text-zinc-500 dark:text-zinc-400 flex items-center gap-1.5">
+        <span
+          className={`inline-flex items-center gap-2 px-2.5 py-1 rounded-full text-[11px] font-mono font-medium tracking-wider uppercase transition-all duration-300 border ${
+            isAuraActive
+              ? 'bg-orange-500/10 text-orange-400 border-orange-500/30 shadow-[0_0_12px_rgba(255,85,0,0.15)]'
+              : 'bg-emerald-50 text-emerald-700 border-emerald-200/80 shadow-xs'
+          }`}
+        >
+          <span className="relative flex h-2 w-2">
+            <span
+              className={`absolute inline-flex h-full w-full rounded-full opacity-60 animate-ping ${
+                isAuraActive ? 'bg-[#FF5500]' : 'bg-emerald-500'
+              }`}
+              style={{ animationDuration: '2.5s' }}
+            />
+            <span
+              className={`relative inline-flex rounded-full h-2 w-2 ${
+                isAuraActive ? 'bg-[#FF5500]' : 'bg-emerald-600'
+              }`}
+            />
+          </span>
           {isAuraActive ? (
-            <>
+            <span className="flex items-center gap-1.5 font-bold">
               <span>HELLFIRE OVERDRIVE</span>
               <Flame className="w-3.5 h-3.5 text-[#FF5500]" />
-            </>
+            </span>
           ) : (
-            'AVAILABLE FOR HIRE'
+            <span className="font-semibold">AVAILABLE FOR HIRE</span>
           )}
         </span>
       </div>
 
-      {/* Dynamic Typewriter Text with animated cursor */}
+      {/* ─── Dynamic Typewriter Text with Animated Terminal Cursor ─── */}
       <div className="flex items-center min-h-[32px] sm:min-h-[36px]">
-        <span className={isAuraActive ? "text-zinc-400 mr-2 text-sm sm:text-base font-normal" : "text-zinc-500 mr-2 text-sm sm:text-base font-semibold"}>&gt;</span>
+        <span className={isAuraActive ? 'text-zinc-400 mr-2 text-sm sm:text-base font-normal' : 'text-zinc-500 mr-2 text-sm sm:text-base font-semibold'}>
+          &gt;
+        </span>
         <span
           className={`text-sm sm:text-base md:text-lg font-bold tracking-tight transition-colors duration-300 ${
             isAuraActive
@@ -91,7 +106,7 @@ export function TypewriterTitle({ className = '', isAuraActive = false }: Typewr
           {displayedText}
         </span>
         <span
-          className={`inline-block w-2 sm:w-2.5 h-4 sm:h-5 ml-1 animate-pulse align-middle ${
+          className={`inline-block w-2 sm:w-2.5 h-4 sm:h-5 ml-1.5 rounded-xs animate-pulse align-middle ${
             isAuraActive ? 'bg-[#FF5500] shadow-[0_0_8px_#FF5500]' : 'bg-zinc-950'
           }`}
         />
