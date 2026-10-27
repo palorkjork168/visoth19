@@ -45,7 +45,7 @@ export function HeroSection({ isAuraActive, onAuraToggle, onOpenResume }: HeroSe
       <div className="relative w-full max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-12 xl:px-16 my-auto flex flex-col lg:flex-row items-center justify-between min-h-[640px] lg:min-h-[780px] xl:min-h-[860px] 2xl:min-h-[920px] gap-8">
         
         {/* ─── LEFT: Big Bold Full Name "CHOU SEREYVISOTH" + Dynamic Animated Title (Pushed Left) ─── */}
-        <div className="relative z-10 flex flex-col justify-center max-w-md lg:max-w-lg xl:max-w-xl pointer-events-none select-none order-2 lg:order-1 lg:pl-2 xl:pl-4">
+        <div className="relative z-10 flex flex-col justify-center max-w-md lg:max-w-lg xl:max-w-xl pointer-events-none select-none order-2 lg:order-1 lg:pl-2 xl:pl-4 animate-fade-up">
           <div
             className={`font-heading font-black tracking-tighter text-[clamp(3.5rem,7.5vw,8.5rem)] leading-[0.84] transition-colors duration-500 ${
               isFullAura ? 'text-white' : 'text-black'
@@ -126,7 +126,7 @@ export function HeroSection({ isAuraActive, onAuraToggle, onOpenResume }: HeroSe
         </div>
 
         {/* ─── RIGHT: Glassmorphic Project Highlights & 3D Aura Button (Pushed Right) ─── */}
-        <div className="relative z-30 flex flex-col items-start lg:items-end text-left lg:text-right font-mono select-none space-y-3.5 max-w-xs sm:max-w-sm order-3 pointer-events-auto lg:pr-2 xl:pr-4">
+        <div className="relative z-30 flex flex-col items-start lg:items-end text-left lg:text-right font-mono select-none space-y-3.5 max-w-xs sm:max-w-sm order-3 pointer-events-auto lg:pr-2 xl:pr-4 animate-fade-up-delay-1">
           
           {/* Latest project glassmorphic card */}
           <div

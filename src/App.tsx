@@ -19,6 +19,7 @@ import { LightBeamButton } from './components/ui/LightBeamButton';
 import { Navbar } from './components/ui/Navbar';
 import { allProjects } from './data/projects';
 import { ProjectDetailPage } from './components/pages/ProjectDetailPage';
+import { RevealOnScroll } from './components/ui/RevealOnScroll';
 
 // ─── Precision Social SVG Icons ─────────────────────────────────────
 function GithubIcon({ className = 'w-4 h-4' }: { className?: string }) {
@@ -51,11 +52,11 @@ export default function App() {
   const [isAuraGlobal, setIsAuraGlobal] = useState(true);
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
-  // Play opening transformation intro (from Ghost Rider to Normal mode) on initial open or refresh
+  // Play opening transformation intro (from Ghost Rider to Normal mode) within 0.75s
   useEffect(() => {
     const introTimer = setTimeout(() => {
       setIsAuraGlobal(false);
-    }, 1400); // 1.4s teaser in Ghost Rider mode before the liquid burn transformation
+    }, 750); // 0.75s teaser in Ghost Rider mode before the liquid burn transformation
 
     return () => clearTimeout(introTimer);
   }, []);
@@ -198,93 +199,97 @@ export default function App() {
       >
         <div className="max-w-4xl mx-auto">
           {/* Section Header */}
-          <div className="mb-8">
-            <h2
-              className={`font-heading font-black text-3xl sm:text-5xl tracking-tight mb-2 ${
-                isAuraGlobal ? 'text-white' : 'text-black'
-              }`}
-            >
-              ABOUT ME
-            </h2>
-            <p className="font-mono text-xs sm:text-sm text-[#FF5500]">
-              Full-Stack Developer &bull; Norton University (Year 4)
-            </p>
-          </div>
+          <RevealOnScroll direction="up" delay={40}>
+            <div className="mb-8">
+              <h2
+                className={`font-heading font-black text-3xl sm:text-5xl tracking-tight mb-2 ${
+                  isAuraGlobal ? 'text-white' : 'text-black'
+                }`}
+              >
+                ABOUT ME
+              </h2>
+              <p className="font-mono text-xs sm:text-sm text-[#FF5500]">
+                Full-Stack Developer &bull; Norton University (Year 4)
+              </p>
+            </div>
+          </RevealOnScroll>
 
           {/* Minimalist Profile & Focus Card */}
-          <MagicBentoCard
-            isAuraActive={isAuraGlobal}
-            enableTilt={false}
-            className={`p-7 sm:p-10 rounded-3xl border transition-all duration-300 ${
-              isAuraGlobal
-                ? 'bg-zinc-900/60 border-zinc-800 shadow-xl'
-                : 'bg-white border-zinc-200 shadow-sm'
-            }`}
-          >
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-zinc-200 dark:border-zinc-800">
-              <div>
-                <h3
-                  className={`font-heading font-bold text-2xl sm:text-3xl ${
-                    isAuraGlobal ? 'text-white' : 'text-zinc-950'
-                  }`}
+          <RevealOnScroll direction="up" delay={120}>
+            <MagicBentoCard
+              isAuraActive={isAuraGlobal}
+              enableTilt={false}
+              className={`p-7 sm:p-10 rounded-3xl border transition-all duration-300 ${
+                isAuraGlobal
+                  ? 'bg-zinc-900/60 border-zinc-800 shadow-xl'
+                  : 'bg-white border-zinc-200 shadow-sm'
+              }`}
+            >
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-zinc-200 dark:border-zinc-800">
+                <div>
+                  <h3
+                    className={`font-heading font-bold text-2xl sm:text-3xl ${
+                      isAuraGlobal ? 'text-white' : 'text-zinc-950'
+                    }`}
+                  >
+                    Chou Sereyvisoth
+                  </h3>
+                  <span className="font-mono text-xs text-zinc-400">
+                    Phnom Penh, Cambodia &bull; Available for Opportunities
+                  </span>
+                </div>
+
+                <LightBeamButton
+                  href="/chousereyvisothCV.pdf"
+                  target="_blank"
+                  isDark={isAuraGlobal}
+                  className="px-4 py-2 text-xs font-mono font-bold self-start sm:self-auto"
                 >
-                  Chou Sereyvisoth
-                </h3>
-                <span className="font-mono text-xs text-zinc-400">
-                  Phnom Penh, Cambodia &bull; Available for Opportunities
-                </span>
+                  <FileText className="w-3.5 h-3.5 text-[#FF5500]" />
+                  <span>View CV &rarr;</span>
+                </LightBeamButton>
               </div>
 
-              <LightBeamButton
-                href="/chousereyvisothCV.pdf"
-                target="_blank"
-                isDark={isAuraGlobal}
-                className="px-4 py-2 text-xs font-mono font-bold self-start sm:self-auto"
-              >
-                <FileText className="w-3.5 h-3.5 text-[#FF5500]" />
-                <span>View CV &rarr;</span>
-              </LightBeamButton>
-            </div>
+              {/* 3 Focused Points: Role, Study At, Interests */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6">
+                <div>
+                  <span className="block font-mono text-[11px] font-bold text-[#FF5500] uppercase tracking-wider mb-1.5">
+                    ROLE
+                  </span>
+                  <p className={`font-medium text-sm sm:text-base ${isAuraGlobal ? 'text-zinc-200' : 'text-zinc-800'}`}>
+                    Full-Stack Developer
+                  </p>
+                  <p className={`text-xs mt-1 ${isAuraGlobal ? 'text-zinc-400' : 'text-zinc-500'}`}>
+                    Web applications &amp; UI design
+                  </p>
+                </div>
 
-            {/* 3 Focused Points: Role, Study At, Interests */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6">
-              <div>
-                <span className="block font-mono text-[11px] font-bold text-[#FF5500] uppercase tracking-wider mb-1.5">
-                  ROLE
-                </span>
-                <p className={`font-medium text-sm sm:text-base ${isAuraGlobal ? 'text-zinc-200' : 'text-zinc-800'}`}>
-                  Full-Stack Developer
-                </p>
-                <p className={`text-xs mt-1 ${isAuraGlobal ? 'text-zinc-400' : 'text-zinc-500'}`}>
-                  Web applications &amp; UI design
-                </p>
-              </div>
+                <div>
+                  <span className="block font-mono text-[11px] font-bold text-[#FF5500] uppercase tracking-wider mb-1.5">
+                    STUDY AT
+                  </span>
+                  <p className={`font-medium text-sm sm:text-base ${isAuraGlobal ? 'text-zinc-200' : 'text-zinc-800'}`}>
+                    Norton University
+                  </p>
+                  <p className={`text-xs mt-1 ${isAuraGlobal ? 'text-zinc-400' : 'text-zinc-500'}`}>
+                    Year 4 &bull; Computer Science &bull; Sala-IT
+                  </p>
+                </div>
 
-              <div>
-                <span className="block font-mono text-[11px] font-bold text-[#FF5500] uppercase tracking-wider mb-1.5">
-                  STUDY AT
-                </span>
-                <p className={`font-medium text-sm sm:text-base ${isAuraGlobal ? 'text-zinc-200' : 'text-zinc-800'}`}>
-                  Norton University
-                </p>
-                <p className={`text-xs mt-1 ${isAuraGlobal ? 'text-zinc-400' : 'text-zinc-500'}`}>
-                  Year 4 &bull; Computer Science &bull; Sala-IT
-                </p>
+                <div>
+                  <span className="block font-mono text-[11px] font-bold text-[#FF5500] uppercase tracking-wider mb-1.5">
+                    INTERESTED IN
+                  </span>
+                  <p className={`font-medium text-sm sm:text-base ${isAuraGlobal ? 'text-zinc-200' : 'text-zinc-800'}`}>
+                    Minimalist Web Systems
+                  </p>
+                  <p className={`text-xs mt-1 ${isAuraGlobal ? 'text-zinc-400' : 'text-zinc-500'}`}>
+                    Clean APIs, performance &amp; UX
+                  </p>
+                </div>
               </div>
-
-              <div>
-                <span className="block font-mono text-[11px] font-bold text-[#FF5500] uppercase tracking-wider mb-1.5">
-                  INTERESTED IN
-                </span>
-                <p className={`font-medium text-sm sm:text-base ${isAuraGlobal ? 'text-zinc-200' : 'text-zinc-800'}`}>
-                  Minimalist Web Systems
-                </p>
-                <p className={`text-xs mt-1 ${isAuraGlobal ? 'text-zinc-400' : 'text-zinc-500'}`}>
-                  Clean APIs, performance &amp; UX
-                </p>
-              </div>
-            </div>
-          </MagicBentoCard>
+            </MagicBentoCard>
+          </RevealOnScroll>
         </div>
       </section>
 
@@ -295,25 +300,29 @@ export default function App() {
           isAuraGlobal ? 'bg-[#0B0C10]' : 'bg-white'
         }`}
       >
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 mb-14 text-center">
-          <h2
-            className={`font-sans font-black text-3xl sm:text-5xl tracking-tight mb-3 ${
-              isAuraGlobal ? 'text-white' : 'text-black'
-            }`}
-          >
-            SKILLS
-          </h2>
-          <p
-            className={`font-sans text-xs sm:text-sm max-w-lg mx-auto ${
-              isAuraGlobal ? 'text-zinc-400' : 'text-zinc-500'
-            }`}
-          >
-            Core technologies, programming languages and frameworks 
-          </p>
-        </div>
+        <RevealOnScroll direction="up" delay={40}>
+          <div className="max-w-6xl mx-auto px-5 sm:px-8 mb-14 text-center">
+            <h2
+              className={`font-sans font-black text-3xl sm:text-5xl tracking-tight mb-3 ${
+                isAuraGlobal ? 'text-white' : 'text-black'
+              }`}
+            >
+              SKILLS
+            </h2>
+            <p
+              className={`font-sans text-xs sm:text-sm max-w-lg mx-auto ${
+                isAuraGlobal ? 'text-zinc-400' : 'text-zinc-500'
+              }`}
+            >
+              Core technologies, programming languages and frameworks 
+            </p>
+          </div>
+        </RevealOnScroll>
 
         {/* Clean Logo + Name presentation matching reference design */}
-        <SkillsDisplay isAuraActive={isAuraGlobal} />
+        <RevealOnScroll direction="up" delay={120}>
+          <SkillsDisplay isAuraActive={isAuraGlobal} />
+        </RevealOnScroll>
       </section>
 
       {/* ─── 4. PROJECTS SECTION WITH MAGIC BENTO ─── */}
@@ -326,139 +335,142 @@ export default function App() {
         <span id="courses" className="absolute -top-24 sr-only" />
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
-            <div>
-              <h2
-                className={`font-heading font-black text-3xl sm:text-5xl tracking-tight mb-2 ${
-                  isAuraGlobal ? 'text-white' : 'text-black'
-                }`}
-              >
-                PROJECTS
-              </h2>
-              <p
-                className={`font-mono text-xs sm:text-sm ${
-                  isAuraGlobal ? 'text-zinc-400' : 'text-zinc-500'
-                }`}
-              >
-                Selected web applications &amp; systems
-              </p>
+          <RevealOnScroll direction="up" delay={40}>
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+              <div>
+                <h2
+                  className={`font-heading font-black text-3xl sm:text-5xl tracking-tight mb-2 ${
+                    isAuraGlobal ? 'text-white' : 'text-black'
+                  }`}
+                >
+                  PROJECTS
+                </h2>
+                <p
+                  className={`font-mono text-xs sm:text-sm ${
+                    isAuraGlobal ? 'text-zinc-400' : 'text-zinc-500'
+                  }`}
+                >
+                  Selected web applications &amp; systems
+                </p>
+              </div>
             </div>
-          </div>
+          </RevealOnScroll>
 
-          {/* Clean Minimal Projects Grid */}
+          {/* Clean Minimal Projects Grid with staggered scroll reveal */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {allProjects.map((project) => (
-              <MagicBentoCard
-                key={project.id}
-                isAuraActive={isAuraGlobal}
-                enableTilt={false}
-                enableMagnetism={false}
-                onClick={() => navigateToProject(project.id)}
-                className={`rounded-2xl border overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 cursor-pointer ${
-                  project.isPinned
-                    ? isAuraGlobal
-                      ? 'bg-zinc-900/85 border-[#FF5500]/40 shadow-[0_4px_25px_rgba(255,85,0,0.15)] hover:border-[#FF5500]/80'
-                      : 'bg-white border-[#FF5500]/40 shadow-md hover:border-[#FF5500]/70'
-                    : isAuraGlobal
-                    ? 'bg-zinc-900/70 border-zinc-800 hover:border-zinc-700'
-                    : 'bg-white border-zinc-200 shadow-sm hover:border-zinc-300'
-                }`}
-              >
-                {/* Image Cover (Clean & Unobstructed, no badges/buttons on top) */}
-                <div className="relative aspect-[16/10] overflow-hidden bg-zinc-100 dark:bg-zinc-800 group">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-
-                {/* Content */}
-                <div className="p-6 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3
-                      className={`font-heading font-bold text-xl mb-2 transition-colors ${
-                        isAuraGlobal
-                          ? 'text-white group-hover:text-[#FF5500]'
-                          : 'text-zinc-900 group-hover:text-[#FF5500]'
-                      }`}
-                    >
-                      {project.title}
-                    </h3>
-                    <p
-                      className={`text-xs sm:text-sm leading-relaxed mb-5 line-clamp-2 ${
-                        isAuraGlobal ? 'text-zinc-400' : 'text-zinc-600'
-                      }`}
-                    >
-                      {project.shortDesc || project.desc}
-                    </p>
+            {allProjects.map((project, idx) => (
+              <RevealOnScroll key={project.id} direction="up" delay={(idx % 3) * 100}>
+                <MagicBentoCard
+                  isAuraActive={isAuraGlobal}
+                  enableTilt={false}
+                  enableMagnetism={false}
+                  onClick={() => navigateToProject(project.id)}
+                  className={`rounded-2xl border overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 cursor-pointer h-full ${
+                    project.isPinned
+                      ? isAuraGlobal
+                        ? 'bg-zinc-900/85 border-[#FF5500]/40 shadow-[0_4px_25px_rgba(255,85,0,0.15)] hover:border-[#FF5500]/80'
+                        : 'bg-white border-[#FF5500]/40 shadow-md hover:border-[#FF5500]/70'
+                      : isAuraGlobal
+                      ? 'bg-zinc-900/70 border-zinc-800 hover:border-zinc-700'
+                      : 'bg-white border-zinc-200 shadow-sm hover:border-zinc-300'
+                  }`}
+                >
+                  {/* Image Cover (Clean & Unobstructed, no badges/buttons on top) */}
+                  <div className="relative aspect-[16/10] overflow-hidden bg-zinc-100 dark:bg-zinc-800 group">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                   </div>
 
-                  <div>
-                    {/* Minimal Tech Tags (Top 3 essential stack) */}
-                    <div className="flex flex-wrap gap-1.5 mb-5">
-                      {project.tech.slice(0, 3).map((t) => (
-                        <span
-                          key={t}
-                          className={`font-mono text-[10px] px-2 py-0.5 rounded font-medium ${
-                            isAuraGlobal
-                              ? 'bg-zinc-800/90 text-zinc-300 border border-zinc-700/50'
-                              : 'bg-zinc-100 text-zinc-700 border border-zinc-200'
-                          }`}
-                        >
-                          {t}
-                        </span>
-                      ))}
+                  {/* Content */}
+                  <div className="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3
+                        className={`font-heading font-bold text-xl mb-2 transition-colors ${
+                          isAuraGlobal
+                            ? 'text-white group-hover:text-[#FF5500]'
+                            : 'text-zinc-900 group-hover:text-[#FF5500]'
+                        }`}
+                      >
+                        {project.title}
+                      </h3>
+                      <p
+                        className={`text-xs sm:text-sm leading-relaxed mb-5 line-clamp-2 ${
+                          isAuraGlobal ? 'text-zinc-400' : 'text-zinc-600'
+                        }`}
+                      >
+                        {project.shortDesc || project.desc}
+                      </p>
                     </div>
 
-                    {/* Actions */}
-                    <div
-                      className={`pt-4 border-t flex items-center justify-between ${
-                        isAuraGlobal ? 'border-zinc-800' : 'border-zinc-100'
-                      }`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <a
-                          href={project.link}
-                          onClick={(e) => e.stopPropagation()}
-                          target="_blank"
-                          rel="noreferrer"
-                          className={`inline-flex items-center gap-1.5 font-mono text-xs font-bold hover:text-[#FF5500] transition-colors ${
-                            isAuraGlobal ? 'text-white' : 'text-black'
-                          }`}
-                        >
-                          <span>VIEW REPO</span>
-                          <GithubIcon className="w-3.5 h-3.5" />
-                        </a>
+                    <div>
+                      {/* Minimal Tech Tags (Top 3 essential stack) */}
+                      <div className="flex flex-wrap gap-1.5 mb-5">
+                        {project.tech.slice(0, 3).map((t) => (
+                          <span
+                            key={t}
+                            className={`font-mono text-[10px] px-2 py-0.5 rounded font-medium ${
+                              isAuraGlobal
+                                ? 'bg-zinc-800/90 text-zinc-300 border border-zinc-700/50'
+                                : 'bg-zinc-100 text-zinc-700 border border-zinc-200'
+                            }`}
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
 
-                        {project.liveDemo && (
+                      {/* Actions */}
+                      <div
+                        className={`pt-4 border-t flex items-center justify-between ${
+                          isAuraGlobal ? 'border-zinc-800' : 'border-zinc-100'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
                           <a
-                            href={project.liveDemo}
+                            href={project.link}
                             onClick={(e) => e.stopPropagation()}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center gap-1 font-mono text-xs font-bold text-[#FF5500] hover:underline"
+                            className={`inline-flex items-center gap-1.5 font-mono text-xs font-bold hover:text-[#FF5500] transition-colors ${
+                              isAuraGlobal ? 'text-white' : 'text-black'
+                            }`}
                           >
-                            <span>DEMO</span>
-                            <ExternalLink className="w-3 h-3" />
+                            <span>VIEW REPO</span>
+                            <GithubIcon className="w-3.5 h-3.5" />
                           </a>
-                        )}
-                      </div>
 
-                      <LightBeamButton
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          navigateToProject(project.id);
-                        }}
-                        isDark={isAuraGlobal}
-                        className="px-3.5 py-1 text-[11px] font-mono font-bold"
-                      >
-                        <span>Details &rarr;</span>
-                      </LightBeamButton>
+                          {project.liveDemo && (
+                            <a
+                              href={project.liveDemo}
+                              onClick={(e) => e.stopPropagation()}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="inline-flex items-center gap-1 font-mono text-xs font-bold text-[#FF5500] hover:underline"
+                            >
+                              <span>DEMO</span>
+                              <ExternalLink className="w-3 h-3" />
+                            </a>
+                          )}
+                        </div>
+
+                        <LightBeamButton
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigateToProject(project.id);
+                          }}
+                          isDark={isAuraGlobal}
+                          className="px-3.5 py-1 text-[11px] font-mono font-bold"
+                        >
+                          <span>Details &rarr;</span>
+                        </LightBeamButton>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </MagicBentoCard>
+                </MagicBentoCard>
+              </RevealOnScroll>
             ))}
           </div>
         </div>
@@ -475,110 +487,116 @@ export default function App() {
         }`}
       >
         <div className="max-w-4xl mx-auto text-center">
-          <h2
-            className={`font-sans font-black text-3xl sm:text-5xl md:text-6xl tracking-tight mb-4 ${
-              isAuraGlobal ? 'text-white' : 'text-black'
-            }`}
-          >
-            LET&apos;S BUILD TOGETHER
-          </h2>
-          <p
-            className={`text-sm sm:text-base max-w-xl mx-auto mb-8 leading-relaxed ${
-              isAuraGlobal ? 'text-zinc-400' : 'text-zinc-500'
-            }`}
-          >
-            Have an engineering role or project in mind? Reach out anytime.
-          </p>
-
-          {/* Quick Actions Row */}
-          <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
-            {/* Quick Copy Email Box */}
-            <div
-              className={`inline-flex items-center gap-2 p-1.5 rounded-2xl border shadow-sm transition-colors ${
-                isAuraGlobal
-                  ? 'border-zinc-800 bg-zinc-900/90 text-white shadow-[0_0_25px_rgba(0,0,0,0.5)]'
-                  : 'border-zinc-300 bg-white text-black'
+          <RevealOnScroll direction="up" delay={40}>
+            <h2
+              className={`font-sans font-black text-3xl sm:text-5xl md:text-6xl tracking-tight mb-4 ${
+                isAuraGlobal ? 'text-white' : 'text-black'
               }`}
             >
+              LET&apos;S BUILD TOGETHER
+            </h2>
+            <p
+              className={`text-sm sm:text-base max-w-xl mx-auto mb-8 leading-relaxed ${
+                isAuraGlobal ? 'text-zinc-400' : 'text-zinc-500'
+              }`}
+            >
+              Have an engineering role or project in mind? Reach out anytime.
+            </p>
+          </RevealOnScroll>
+
+          {/* Quick Actions Row */}
+          <RevealOnScroll direction="up" delay={120}>
+            <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
+              {/* Quick Copy Email Box */}
               <div
-                className={`flex items-center gap-2 px-3 py-1.5 font-mono text-xs sm:text-sm font-semibold ${
-                  isAuraGlobal ? 'text-white' : 'text-black'
+                className={`inline-flex items-center gap-2 p-1.5 rounded-2xl border shadow-sm transition-colors ${
+                  isAuraGlobal
+                    ? 'border-zinc-800 bg-zinc-900/90 text-white shadow-[0_0_25px_rgba(0,0,0,0.5)]'
+                    : 'border-zinc-300 bg-white text-black'
                 }`}
               >
-                <Mail className="w-4 h-4 text-[#FF5500]" />
-                <span>chousereyvisoth@gmail.com</span>
+                <div
+                  className={`flex items-center gap-2 px-3 py-1.5 font-mono text-xs sm:text-sm font-semibold ${
+                    isAuraGlobal ? 'text-white' : 'text-black'
+                  }`}
+                >
+                  <Mail className="w-4 h-4 text-[#FF5500]" />
+                  <span>chousereyvisoth@gmail.com</span>
+                </div>
+                <LightBeamButton
+                  onClick={copyEmail}
+                  isDark={isAuraGlobal}
+                  pill={false}
+                  className="px-4 py-2 rounded-xl font-mono text-xs font-bold"
+                >
+                  {copiedEmail ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-[#FF5500]" />
+                      <span>COPIED!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>COPY</span>
+                    </>
+                  )}
+                </LightBeamButton>
               </div>
+
+              {/* Direct CV / Resume Link */}
               <LightBeamButton
-                onClick={copyEmail}
+                href="/chousereyvisothCV.pdf"
+                target="_blank"
                 isDark={isAuraGlobal}
                 pill={false}
-                className="px-4 py-2 rounded-xl font-mono text-xs font-bold"
+                className="px-6 py-3.5 rounded-2xl font-mono text-xs sm:text-sm font-bold tracking-wider"
               >
-                {copiedEmail ? (
-                  <>
-                    <Check className="w-3.5 h-3.5 text-[#FF5500]" />
-                    <span>COPIED!</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-3.5 h-3.5" />
-                    <span>COPY</span>
-                  </>
-                )}
+                <FileText className="w-4 h-4 text-[#FF5500]" />
+                <span>VIEW CV / RESUME</span>
               </LightBeamButton>
             </div>
-
-            {/* Direct CV / Resume Link */}
-            <LightBeamButton
-              href="/chousereyvisothCV.pdf"
-              target="_blank"
-              isDark={isAuraGlobal}
-              pill={false}
-              className="px-6 py-3.5 rounded-2xl font-mono text-xs sm:text-sm font-bold tracking-wider"
-            >
-              <FileText className="w-4 h-4 text-[#FF5500]" />
-              <span>VIEW CV / RESUME</span>
-            </LightBeamButton>
-          </div>
+          </RevealOnScroll>
 
           {/* Social Links Row with PillFlip animation */}
-          <div className="flex items-center justify-center gap-4 sm:gap-5">
-            <PillFlipSocialButton
-              href="https://github.com/palorkjork168"
-              ariaLabel="GitHub"
-              isAuraActive={isAuraGlobal}
-              accentColor="#18181B"
-            >
-              <GithubIcon className="w-5 h-5" />
-            </PillFlipSocialButton>
+          <RevealOnScroll direction="up" delay={180}>
+            <div className="flex items-center justify-center gap-4 sm:gap-5">
+              <PillFlipSocialButton
+                href="https://github.com/palorkjork168"
+                ariaLabel="GitHub"
+                isAuraActive={isAuraGlobal}
+                accentColor="#18181B"
+              >
+                <GithubIcon className="w-5 h-5" />
+              </PillFlipSocialButton>
 
-            <PillFlipSocialButton
-              href="https://www.linkedin.com/in/chou-sereyvisoth-66ba3a3b9/"
-              ariaLabel="LinkedIn"
-              isAuraActive={isAuraGlobal}
-              accentColor="#0077B5"
-            >
-              <LinkedinIcon className="w-5 h-5" />
-            </PillFlipSocialButton>
+              <PillFlipSocialButton
+                href="https://www.linkedin.com/in/chou-sereyvisoth-66ba3a3b9/"
+                ariaLabel="LinkedIn"
+                isAuraActive={isAuraGlobal}
+                accentColor="#0077B5"
+              >
+                <LinkedinIcon className="w-5 h-5" />
+              </PillFlipSocialButton>
 
-            <PillFlipSocialButton
-              href="https://t.me/+85587959626"
-              ariaLabel="Telegram"
-              isAuraActive={isAuraGlobal}
-              accentColor="#0088CC"
-            >
-              <TelegramIcon className="w-5 h-5" />
-            </PillFlipSocialButton>
+              <PillFlipSocialButton
+                href="https://t.me/+85587959626"
+                ariaLabel="Telegram"
+                isAuraActive={isAuraGlobal}
+                accentColor="#0088CC"
+              >
+                <TelegramIcon className="w-5 h-5" />
+              </PillFlipSocialButton>
 
-            <PillFlipSocialButton
-              href="tel:+85587959626"
-              ariaLabel="Phone"
-              isAuraActive={isAuraGlobal}
-              accentColor="#FF5500"
-            >
-              <Phone className="w-5 h-5" />
-            </PillFlipSocialButton>
-          </div>
+              <PillFlipSocialButton
+                href="tel:+85587959626"
+                ariaLabel="Phone"
+                isAuraActive={isAuraGlobal}
+                accentColor="#FF5500"
+              >
+                <Phone className="w-5 h-5" />
+              </PillFlipSocialButton>
+            </div>
+          </RevealOnScroll>
         </div>
       </section>
         </>

@@ -282,7 +282,7 @@ export function LiquidPortraitReveal({
       let lastTime = performance.now();
       let startTime = performance.now();
       let targetProgress = isAltActive ? 0.0 : 1.0;
-      let transitionSpeed = 1.3;
+      let transitionSpeed = 0.85; // Fast, punchy liquid burn transformation (within 0.8s)
 
       const loop = (now: number) => {
         const dt = Math.min((now - lastTime) / 1000, 0.05);
