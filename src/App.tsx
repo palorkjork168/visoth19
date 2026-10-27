@@ -291,14 +291,14 @@ export default function App() {
               isAuraGlobal ? 'text-white' : 'text-black'
             }`}
           >
-            SKILLS &amp; 
+            SKILLS
           </h2>
           <p
             className={`font-sans text-xs sm:text-sm max-w-lg mx-auto ${
               isAuraGlobal ? 'text-zinc-400' : 'text-zinc-500'
             }`}
           >
-            Core technologies, programming languages and frameworks I build scalable web systems with
+            Core technologies, programming languages and frameworks 
           </p>
         </div>
 

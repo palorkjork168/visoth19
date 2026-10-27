@@ -1,17 +1,6 @@
 import { useState, useEffect } from 'react';
-import {
-  ArrowLeft,
-  ExternalLink,
-  Star,
-  CheckCircle2,
-  Calendar,
-  Layers,
-  Sparkles,
-  ArrowRight,
-  Code2,
-} from 'lucide-react';
+import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react';
 import { ProjectItem, allProjects } from '../../data/projects';
-import { LightBeamButton } from '../ui/LightBeamButton';
 
 interface ProjectDetailPageProps {
   project: ProjectItem;
@@ -48,392 +37,290 @@ export function ProjectDetailPage({
   const nextProject =
     currentIndex < allProjects.length - 1 ? allProjects[currentIndex + 1] : null;
 
+  // Title breakdown into Line 1 and Line 2
+  const titleLine1 = project.titleTop || project.title.toUpperCase();
+  const titleLine2 = project.titleBottom || project.category.toUpperCase();
+  const leadTech = project.tech[0] || 'FULL-STACK';
+
+  // Metrics (Fallback to default 3 metrics if not specified)
+  const metrics = project.metrics && project.metrics.length > 0 ? project.metrics : [
+    { value: '100%', desc: 'Structured, tested, and validated architecture' },
+    { value: String(project.tech.length), desc: 'Core modern web technologies and libraries integrated' },
+    { value: '2025', desc: 'Active continuous engineering and maintenance' },
+  ];
+
   return (
     <article
-      className={`min-h-screen pt-24 sm:pt-28 pb-20 px-5 sm:px-8 transition-colors duration-500 ${
-        isAuraActive ? 'bg-[#0B0C10] text-slate-100' : 'bg-white text-zinc-900'
+      className={`relative min-h-screen pt-24 sm:pt-28 pb-20 px-6 sm:px-10 lg:px-14 overflow-hidden transition-colors duration-500 ${
+        isAuraActive ? 'bg-[#0A0D12] text-slate-100' : 'bg-[#EFF4F5] text-zinc-900'
       }`}
     >
-      <div className="max-w-5xl mx-auto">
-        {/* ─── Top Breadcrumb Navigation & Back Button ─── */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-6 border-b border-zinc-200 dark:border-zinc-800">
+      {/* ─── Topographic Map Background Contours ─── */}
+      <svg
+        className={`absolute inset-0 w-full h-full pointer-events-none transition-opacity duration-500 ${
+          isAuraActive ? 'opacity-[0.05] stroke-orange-400' : 'opacity-[0.16] stroke-teal-900'
+        }`}
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        strokeWidth="1.2"
+      >
+        <path d="M-100 200 C 300 120, 500 350, 900 180 C 1300 20, 1600 300, 2000 150" />
+        <path d="M-100 320 C 250 240, 600 480, 1000 280 C 1400 100, 1700 420, 2100 280" />
+        <path d="M-100 460 C 350 400, 700 620, 1100 420 C 1500 220, 1800 540, 2200 400" />
+        <path d="M-100 600 C 400 520, 800 740, 1200 560 C 1600 360, 1900 680, 2300 540" />
+        <path d="M-100 750 C 450 680, 900 880, 1300 700 C 1700 500, 2000 820, 2400 680" />
+        <circle cx="850" cy="380" r="160" strokeDasharray="3 3" />
+        <circle cx="850" cy="380" r="280" strokeDasharray="5 5" />
+      </svg>
+
+      <div className="relative z-10 max-w-6xl mx-auto">
+        {/* ─── Top Return Bar ─── */}
+        <div className="flex items-center justify-between mb-8 pb-4 border-b border-zinc-300/70 dark:border-zinc-800">
           <button
             onClick={onBack}
-            className={`group inline-flex items-center gap-2.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-mono font-bold transition-all cursor-pointer ${
+            className={`group inline-flex items-center gap-2 text-xs font-mono font-bold tracking-wider uppercase transition-colors cursor-pointer ${
               isAuraActive
-                ? 'bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border border-zinc-800 hover:border-[#FF5500]/50 hover:text-white'
-                : 'bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-200 hover:border-zinc-300'
+                ? 'text-zinc-400 hover:text-[#FF5500]'
+                : 'text-zinc-600 hover:text-[#0891B2]'
             }`}
           >
-            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1 text-[#FF5500]" />
+            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             <span>Back to All Projects</span>
           </button>
 
-          <div className="flex items-center gap-2 font-mono text-xs">
-            <span
-              className={`px-3 py-1 rounded-full ${
-                isAuraActive
-                  ? 'bg-zinc-900 text-zinc-400 border border-zinc-800'
-                  : 'bg-zinc-100 text-zinc-600 border border-zinc-200'
-              }`}
-            >
-              Project {String(currentIndex + 1).padStart(2, '0')} /{' '}
-              {String(allProjects.length).padStart(2, '0')}
-            </span>
-          </div>
+          <span className="font-mono text-xs text-zinc-400">
+            {String(currentIndex + 1).padStart(2, '0')} / {String(allProjects.length).padStart(2, '0')}
+          </span>
         </div>
 
-        {/* ─── Project Title & High-Level Header ─── */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
-          <div>
-            <div className="flex flex-wrap items-center gap-2.5 mb-3.5">
+        {/* ─── Hero Section: Left Text + Right Chamfered Image ─── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center mb-16 lg:mb-20">
+          {/* Left Column: Meta, Giant Title, Short Info, Tech Stack, and CTA */}
+          <div className="lg:col-span-7 flex flex-col items-start space-y-6">
+            {/* Meta Category Tag */}
+            <div className="flex items-center gap-2 font-mono text-xs font-semibold tracking-widest uppercase text-zinc-500 dark:text-zinc-400">
+              <span className={isAuraActive ? 'text-[#FF5500]' : 'text-[#0891B2]'}>—</span>
+              <span>{project.category.toUpperCase()}</span>
+              <span>·</span>
+              <span>{leadTech.toUpperCase()}</span>
+              <span>·</span>
+              <span>{project.year || '2025'}</span>
+            </div>
+
+            {/* Giant Bold Two-Line Title */}
+            <h1 className="font-heading font-black text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] tracking-tight leading-[0.88] select-none uppercase">
+              <span className={`block ${isAuraActive ? 'text-white' : 'text-zinc-950'}`}>
+                {titleLine1}
+              </span>
               <span
-                className={`px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider ${
+                className={`block ${
                   isAuraActive
-                    ? 'bg-[#FF5500]/15 text-[#FF5500] border border-[#FF5500]/30'
-                    : 'bg-orange-50 text-orange-700 border border-orange-200'
+                    ? 'text-[#FF5500] drop-shadow-[0_2px_18px_rgba(255,85,0,0.35)]'
+                    : 'text-[#0891B2]'
                 }`}
               >
-                {project.category}
+                {titleLine2}
               </span>
-
-              <span
-                className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono font-medium ${
-                  project.status === 'Completed'
-                    ? 'bg-emerald-500/15 text-emerald-500 border border-emerald-500/30'
-                    : 'bg-amber-500/15 text-amber-500 border border-amber-500/30'
-                }`}
-              >
-                <span
-                  className={`w-1.5 h-1.5 rounded-full ${
-                    project.status === 'Completed'
-                      ? 'bg-emerald-500'
-                      : 'bg-amber-500 animate-pulse'
-                  }`}
-                />
-                <span>{project.status}</span>
-              </span>
-
-              {project.isPinned && (
-                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-[#FF5500] text-black shadow-[0_0_12px_rgba(255,85,0,0.35)]">
-                  <Star className="w-3 h-3 fill-current" />
-                  <span>Featured Build</span>
-                </span>
-              )}
-            </div>
-
-            <h1
-              className={`font-sans font-black text-3xl sm:text-5xl lg:text-6xl tracking-tight ${
-                isAuraActive ? 'text-white' : 'text-zinc-950'
-              }`}
-            >
-              {project.title}
             </h1>
-          </div>
 
-          {/* Action Links (Demo + Repository) */}
-          <div className="flex flex-wrap items-center gap-3">
-            {project.liveDemo && (
-              <LightBeamButton
-                href={project.liveDemo}
-                target="_blank"
-                isDark={isAuraActive}
-                className="px-5 py-2.5 font-mono text-xs sm:text-sm font-bold"
-              >
-                <span>Live Demo</span>
-                <ExternalLink className="w-4 h-4 text-[#FF5500]" />
-              </LightBeamButton>
-            )}
-
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noreferrer"
-              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-mono text-xs sm:text-sm font-bold transition-all shadow-sm ${
-                isAuraActive
-                  ? 'bg-zinc-900 hover:bg-zinc-800 text-white border border-zinc-700 hover:border-zinc-500'
-                  : 'bg-zinc-950 hover:bg-zinc-800 text-white border border-transparent'
+            {/* Short Info (Crisp, clean paragraph) */}
+            <p
+              className={`font-sans text-sm sm:text-base leading-relaxed max-w-xl ${
+                isAuraActive ? 'text-zinc-300' : 'text-zinc-700 font-normal'
               }`}
             >
-              <span>GitHub Repo</span>
-              <GithubIcon className="w-4 h-4" />
-            </a>
-          </div>
-        </div>
+              {project.shortDesc || project.desc}
+            </p>
 
-        {/* ─── Hero Project Image Showcase ─── */}
-        <div className="mb-12">
-          <div
-            className={`relative rounded-3xl overflow-hidden border shadow-xl transition-all duration-300 ${
-              isAuraActive
-                ? 'bg-zinc-950 border-zinc-800 shadow-[0_20px_50px_rgba(0,0,0,0.8)]'
-                : 'bg-zinc-100 border-zinc-200 shadow-md'
-            }`}
-          >
-            <div className="aspect-[16/9] sm:aspect-[16/10] w-full overflow-hidden bg-zinc-950">
-              <img
-                src={selectedImage}
-                alt={project.title}
-                className="w-full h-full object-cover sm:object-contain object-center transition-all duration-500"
-              />
+            {/* Tech Stack Pills (Monospace bordered tags matching reference) */}
+            <div className="flex flex-wrap gap-2 pt-1">
+              {project.tech.map((technology) => (
+                <span
+                  key={technology}
+                  className={`font-mono text-[11px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-sm border transition-colors ${
+                    isAuraActive
+                      ? 'bg-zinc-900/80 text-zinc-300 border-zinc-700/80 hover:border-[#FF5500]/60'
+                      : 'bg-white/90 text-zinc-800 border-zinc-300/90 shadow-2xs'
+                  }`}
+                >
+                  {technology}
+                </span>
+              ))}
+            </div>
+
+            {/* Action Buttons (Live Site + GitHub) */}
+            <div className="flex flex-wrap items-center gap-3 pt-3">
+              {project.liveDemo && (
+                <a
+                  href={project.liveDemo}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`inline-flex items-center gap-2 px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider text-white rounded-sm shadow-md transition-all cursor-pointer active:scale-95 ${
+                    isAuraActive
+                      ? 'bg-[#FF5500] hover:bg-[#E04B00] shadow-[0_0_20px_rgba(255,85,0,0.4)]'
+                      : 'bg-[#0891B2] hover:bg-[#0E7490]'
+                  }`}
+                >
+                  <span>LIVE SITE</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              )}
+
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noreferrer"
+                className={`inline-flex items-center gap-2 px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider rounded-sm border transition-all cursor-pointer active:scale-95 ${
+                  isAuraActive
+                    ? 'border-zinc-700 bg-zinc-900/70 hover:bg-zinc-800 text-white'
+                    : 'border-zinc-400 bg-white/70 hover:bg-zinc-100 text-zinc-900 shadow-2xs'
+                }`}
+              >
+                <span>GITHUB REPO</span>
+                <GithubIcon className="w-3.5 h-3.5" />
+              </a>
             </div>
           </div>
 
-          {/* Gallery Thumbnails if available (e.g. QR generator, HR platform) */}
-          {project.gallery && project.gallery.length > 1 && (
-            <div className="mt-4">
-              <div className="flex items-center gap-2 mb-2 font-mono text-xs text-zinc-400">
-                <span>PROJECT SCREENSHOTS:</span>
+          {/* Right Column: Featured Image with 45-Degree Chamfered Corner */}
+          <div className="lg:col-span-5 flex flex-col items-center">
+            <div
+              className={`relative w-full rounded-2xl overflow-hidden transition-all duration-300 ${
+                isAuraActive
+                  ? 'shadow-[0_16px_40px_rgba(0,0,0,0.85)] border border-zinc-800'
+                  : 'shadow-lg border border-zinc-300/80'
+              }`}
+              style={{
+                clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%)',
+              }}
+            >
+              <div className="aspect-[4/3] w-full bg-zinc-950 overflow-hidden">
+                <img
+                  src={selectedImage}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                />
               </div>
-              <div className="flex items-center gap-3 overflow-x-auto pb-2">
+            </div>
+
+            {/* Gallery Thumbnails if available */}
+            {project.gallery && project.gallery.length > 1 && (
+              <div className="flex items-center gap-2.5 mt-4 w-full overflow-x-auto pb-1">
                 {project.gallery.map((imgSrc, idx) => {
                   const isSelected = selectedImage === imgSrc;
                   return (
                     <button
                       key={idx}
                       onClick={() => setSelectedImage(imgSrc)}
-                      className={`relative w-24 sm:w-28 h-16 rounded-xl overflow-hidden border-2 transition-all cursor-pointer flex-shrink-0 ${
+                      className={`relative w-16 sm:w-20 h-12 rounded-lg overflow-hidden border-2 transition-all cursor-pointer flex-shrink-0 ${
                         isSelected
-                          ? 'border-[#FF5500] scale-105 shadow-[0_0_15px_rgba(255,85,0,0.4)]'
-                          : isAuraActive
-                          ? 'border-zinc-800 opacity-60 hover:opacity-100 hover:border-zinc-600'
-                          : 'border-zinc-200 opacity-70 hover:opacity-100 hover:border-zinc-400'
+                          ? isAuraActive
+                            ? 'border-[#FF5500] scale-105 shadow-[0_0_10px_rgba(255,85,0,0.4)]'
+                            : 'border-[#0891B2] scale-105 shadow-sm'
+                          : 'border-zinc-300/60 dark:border-zinc-800 opacity-60 hover:opacity-100'
                       }`}
                     >
-                      <img
-                        src={imgSrc}
-                        alt={`Screenshot ${idx + 1}`}
-                        className="w-full h-full object-cover"
-                      />
+                      <img src={imgSrc} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
                     </button>
                   );
                 })}
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
 
-        {/* ─── Details Grid: Short Description & Tech Stack ─── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 mb-16">
-          {/* Left Column: Project Overview & Features */}
-          <div className="lg:col-span-7 space-y-8">
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <Sparkles className="w-4 h-4 text-[#FF5500]" />
-                <h2
-                  className={`font-mono text-xs uppercase tracking-widest font-bold ${
+        {/* ─── Bottom Metrics Section with Corner Brackets (HUD Tech aesthetic) ─── */}
+        <div className="pt-10 border-t border-zinc-300/70 dark:border-zinc-800/80">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            {metrics.map((metric, idx) => (
+              <div
+                key={idx}
+                className="relative p-6 sm:p-7 select-none transition-all duration-300 group"
+              >
+                {/* ⌜ Top-Left Bracket */}
+                <span
+                  className={`absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 transition-colors ${
+                    isAuraActive
+                      ? 'border-zinc-500 group-hover:border-[#FF5500]'
+                      : 'border-zinc-800 group-hover:border-[#0891B2]'
+                  }`}
+                />
+                {/* ⌝ Top-Right Bracket */}
+                <span
+                  className={`absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 transition-colors ${
+                    isAuraActive
+                      ? 'border-zinc-500 group-hover:border-[#FF5500]'
+                      : 'border-zinc-800 group-hover:border-[#0891B2]'
+                  }`}
+                />
+                {/* ⌞ Bottom-Left Bracket */}
+                <span
+                  className={`absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 transition-colors ${
+                    isAuraActive
+                      ? 'border-zinc-500 group-hover:border-[#FF5500]'
+                      : 'border-zinc-800 group-hover:border-[#0891B2]'
+                  }`}
+                />
+                {/* ⌟ Bottom-Right Bracket */}
+                <span
+                  className={`absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 transition-colors ${
+                    isAuraActive
+                      ? 'border-zinc-500 group-hover:border-[#FF5500]'
+                      : 'border-zinc-800 group-hover:border-[#0891B2]'
+                  }`}
+                />
+
+                {/* Big Bold Stat / Number */}
+                <div
+                  className={`font-heading font-black text-4xl sm:text-5xl lg:text-6xl leading-none mb-3 transition-colors ${
+                    isAuraActive ? 'text-[#FF5500]' : 'text-[#0891B2]'
+                  }`}
+                >
+                  {metric.value}
+                </div>
+
+                {/* Short Description Underneath */}
+                <p
+                  className={`font-sans text-xs sm:text-sm leading-relaxed ${
                     isAuraActive ? 'text-zinc-400' : 'text-zinc-600'
                   }`}
                 >
-                  About The Project
-                </h2>
+                  {metric.desc}
+                </p>
               </div>
-              <p
-                className={`text-base sm:text-lg leading-relaxed ${
-                  isAuraActive ? 'text-zinc-200' : 'text-zinc-700'
-                }`}
-              >
-                {project.desc}
-              </p>
-            </div>
-
-            {/* Key Features / Highlights */}
-            {project.features && project.features.length > 0 && (
-              <div
-                className={`p-6 sm:p-7 rounded-2xl border ${
-                  isAuraActive
-                    ? 'bg-zinc-900/50 border-zinc-800/80'
-                    : 'bg-zinc-50 border-zinc-200'
-                }`}
-              >
-                <div className="flex items-center gap-2 mb-4">
-                  <Layers className="w-4 h-4 text-[#FF5500]" />
-                  <h3
-                    className={`font-mono text-xs uppercase tracking-widest font-bold ${
-                      isAuraActive ? 'text-white' : 'text-zinc-900'
-                    }`}
-                  >
-                    Key Architecture &amp; Implementation Details
-                  </h3>
-                </div>
-
-                <ul className="space-y-3 font-sans text-sm sm:text-base">
-                  {project.features.map((feat, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-[#FF5500] shrink-0 mt-0.5" />
-                      <span
-                        className={
-                          isAuraActive ? 'text-zinc-300' : 'text-zinc-700'
-                        }
-                      >
-                        {feat}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-
-          {/* Right Column: Tech Stack & Project Metadata */}
-          <div className="lg:col-span-5 space-y-6">
-            {/* Tech Stack Card */}
-            <div
-              className={`p-6 sm:p-7 rounded-2xl border ${
-                isAuraActive
-                  ? 'bg-zinc-900/60 border-zinc-800 shadow-lg'
-                  : 'bg-white border-zinc-200 shadow-sm'
-              }`}
-            >
-              <div className="flex items-center gap-2 mb-4">
-                <Code2 className="w-4 h-4 text-[#FF5500]" />
-                <h3
-                  className={`font-mono text-xs uppercase tracking-widest font-bold ${
-                    isAuraActive ? 'text-white' : 'text-zinc-900'
-                  }`}
-                >
-                  Technologies &amp; Tools
-                </h3>
-              </div>
-              <p
-                className={`text-xs mb-5 ${
-                  isAuraActive ? 'text-zinc-400' : 'text-zinc-500'
-                }`}
-              >
-                Frameworks, libraries, and runtime environment powering this project:
-              </p>
-
-              <div className="flex flex-wrap gap-2">
-                {project.tech.map((technology) => (
-                  <span
-                    key={technology}
-                    className={`font-mono text-xs px-3 py-1.5 rounded-xl font-semibold border transition-all ${
-                      isAuraActive
-                        ? 'bg-zinc-800/80 text-zinc-200 border-zinc-700 hover:border-[#FF5500]/60 hover:text-white'
-                        : 'bg-zinc-100 text-zinc-800 border-zinc-200 hover:border-zinc-400'
-                    }`}
-                  >
-                    {technology}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Project Specs Card */}
-            <div
-              className={`p-6 rounded-2xl border font-mono text-xs space-y-3.5 ${
-                isAuraActive
-                  ? 'bg-zinc-900/30 border-zinc-800 text-zinc-400'
-                  : 'bg-zinc-50 border-zinc-200 text-zinc-600'
-              }`}
-            >
-              <div className="flex items-center justify-between pb-2 border-b border-zinc-200 dark:border-zinc-800">
-                <span>AUTHOR ROLE</span>
-                <span
-                  className={`font-semibold ${
-                    isAuraActive ? 'text-white' : 'text-zinc-900'
-                  }`}
-                >
-                  {project.role || 'Full-Stack Developer'}
-                </span>
-              </div>
-
-              <div className="flex items-center justify-between pb-2 border-b border-zinc-200 dark:border-zinc-800">
-                <span>TIMELINE</span>
-                <span
-                  className={`font-semibold flex items-center gap-1 ${
-                    isAuraActive ? 'text-white' : 'text-zinc-900'
-                  }`}
-                >
-                  <Calendar className="w-3.5 h-3.5 text-[#FF5500]" />
-                  <span>{project.year || '2024 - 2025'}</span>
-                </span>
-              </div>
-
-              <div className="flex items-center justify-between">
-                <span>CODE REPOSITORY</span>
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="font-bold text-[#FF5500] hover:underline flex items-center gap-1"
-                >
-                  <span>github.com</span>
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
 
         {/* ─── Bottom Navigation: Previous / Next Project ─── */}
-        <div className="pt-10 border-t border-zinc-200 dark:border-zinc-800">
-          <div className="flex items-center justify-between gap-4">
-            {prevProject ? (
-              <button
-                onClick={() => onSelectProject(prevProject.id)}
-                className={`group flex items-center gap-3 p-4 rounded-2xl border text-left transition-all cursor-pointer ${
-                  isAuraActive
-                    ? 'border-zinc-800 hover:border-[#FF5500]/50 hover:bg-zinc-900/60'
-                    : 'border-zinc-200 hover:border-zinc-400 hover:bg-zinc-50'
-                }`}
-              >
-                <ArrowLeft className="w-5 h-5 text-[#FF5500] transition-transform group-hover:-translate-x-1 shrink-0" />
-                <div>
-                  <span className="block font-mono text-[10px] uppercase text-zinc-400">
-                    Previous Project
-                  </span>
-                  <span
-                    className={`font-sans font-bold text-sm sm:text-base ${
-                      isAuraActive ? 'text-white' : 'text-zinc-900'
-                    }`}
-                  >
-                    {prevProject.title}
-                  </span>
-                </div>
-              </button>
-            ) : (
-              <div />
-            )}
-
+        <div className="mt-14 pt-6 border-t border-zinc-300/60 dark:border-zinc-800 flex items-center justify-between font-mono text-xs">
+          {prevProject ? (
             <button
-              onClick={onBack}
-              className={`hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-mono text-xs font-bold transition-all cursor-pointer ${
-                isAuraActive
-                  ? 'bg-zinc-900 hover:bg-zinc-800 text-zinc-300'
-                  : 'bg-zinc-100 hover:bg-zinc-200 text-zinc-700'
+              onClick={() => onSelectProject(prevProject.id)}
+              className={`inline-flex items-center gap-2 font-bold uppercase transition-colors cursor-pointer ${
+                isAuraActive ? 'text-zinc-400 hover:text-white' : 'text-zinc-600 hover:text-black'
               }`}
             >
-              <span>All Projects</span>
+              <ArrowLeft className="w-3.5 h-3.5 text-[#FF5500]" />
+              <span>Prev: {prevProject.title}</span>
             </button>
+          ) : (
+            <div />
+          )}
 
-            {nextProject ? (
-              <button
-                onClick={() => onSelectProject(nextProject.id)}
-                className={`group flex items-center gap-3 p-4 rounded-2xl border text-right transition-all cursor-pointer ${
-                  isAuraActive
-                    ? 'border-zinc-800 hover:border-[#FF5500]/50 hover:bg-zinc-900/60'
-                    : 'border-zinc-200 hover:border-zinc-400 hover:bg-zinc-50'
-                }`}
-              >
-                <div>
-                  <span className="block font-mono text-[10px] uppercase text-zinc-400">
-                    Next Project
-                  </span>
-                  <span
-                    className={`font-sans font-bold text-sm sm:text-base ${
-                      isAuraActive ? 'text-white' : 'text-zinc-900'
-                    }`}
-                  >
-                    {nextProject.title}
-                  </span>
-                </div>
-                <ArrowRight className="w-5 h-5 text-[#FF5500] transition-transform group-hover:translate-x-1 shrink-0" />
-              </button>
-            ) : (
-              <div />
-            )}
-          </div>
+          {nextProject ? (
+            <button
+              onClick={() => onSelectProject(nextProject.id)}
+              className={`inline-flex items-center gap-2 font-bold uppercase transition-colors cursor-pointer ${
+                isAuraActive ? 'text-zinc-400 hover:text-white' : 'text-zinc-600 hover:text-black'
+              }`}
+            >
+              <span>Next: {nextProject.title}</span>
+              <ArrowRight className="w-3.5 h-3.5 text-[#FF5500]" />
+            </button>
+          ) : (
+            <div />
+          )}
         </div>
       </div>
     </article>
