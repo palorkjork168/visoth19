@@ -75,13 +75,13 @@ export function ProjectDetailPage({
 
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* ─── Top Return Bar ─── */}
-        <div className="flex items-center justify-between mb-8 pb-4 border-b border-zinc-300/70 dark:border-zinc-800">
+        <div className="flex items-center justify-between mb-8 pb-3 border-b border-zinc-300/60 dark:border-zinc-800">
           <button
             onClick={onBack}
             className={`group inline-flex items-center gap-2 text-xs font-mono font-bold tracking-wider uppercase transition-colors cursor-pointer ${
               isAuraActive
                 ? 'text-zinc-400 hover:text-[#FF5500]'
-                : 'text-zinc-600 hover:text-[#0891B2]'
+                : 'text-zinc-600 hover:text-[#007D8B]'
             }`}
           >
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
@@ -94,12 +94,12 @@ export function ProjectDetailPage({
         </div>
 
         {/* ─── Hero Section: Left Text + Right Chamfered Image ─── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center mb-16 lg:mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-14 lg:mb-18">
           {/* Left Column: Meta, Giant Title, Short Info, Tech Stack, and CTA */}
-          <div className="lg:col-span-7 flex flex-col items-start space-y-6">
+          <div className="lg:col-span-7 flex flex-col items-start space-y-5">
             {/* Meta Category Tag */}
-            <div className="flex items-center gap-2 font-mono text-xs font-semibold tracking-widest uppercase text-zinc-500 dark:text-zinc-400">
-              <span className={isAuraActive ? 'text-[#FF5500]' : 'text-[#0891B2]'}>—</span>
+            <div className="flex items-center gap-2 font-mono text-[11px] font-semibold tracking-widest uppercase text-zinc-500 dark:text-zinc-400">
+              <span className={isAuraActive ? 'text-[#FF5500]' : 'text-[#007D8B]'}>—</span>
               <span>{project.category.toUpperCase()}</span>
               <span>·</span>
               <span>{leadTech.toUpperCase()}</span>
@@ -107,8 +107,11 @@ export function ProjectDetailPage({
               <span>{project.year || '2025'}</span>
             </div>
 
-            {/* Giant Bold Two-Line Title */}
-            <h1 className="font-heading font-black text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] tracking-tight leading-[0.88] select-none uppercase">
+            {/* Giant Bold Two-Line Title with Condensed Stretch */}
+            <h1
+              className="font-heading font-black text-6xl sm:text-7xl md:text-8xl lg:text-[5.8rem] tracking-tight leading-[0.86] select-none uppercase"
+              style={{ fontStretch: '75%' }}
+            >
               <span className={`block ${isAuraActive ? 'text-white' : 'text-zinc-950'}`}>
                 {titleLine1}
               </span>
@@ -116,7 +119,7 @@ export function ProjectDetailPage({
                 className={`block ${
                   isAuraActive
                     ? 'text-[#FF5500] drop-shadow-[0_2px_18px_rgba(255,85,0,0.35)]'
-                    : 'text-[#0891B2]'
+                    : 'text-[#007D8B]'
                 }`}
               >
                 {titleLine2}
@@ -125,22 +128,22 @@ export function ProjectDetailPage({
 
             {/* Short Info (Crisp, clean paragraph) */}
             <p
-              className={`font-sans text-sm sm:text-base leading-relaxed max-w-xl ${
+              className={`font-sans text-sm sm:text-base leading-relaxed max-w-lg ${
                 isAuraActive ? 'text-zinc-300' : 'text-zinc-700 font-normal'
               }`}
             >
               {project.shortDesc || project.desc}
             </p>
 
-            {/* Tech Stack Pills (Monospace bordered tags matching reference) */}
-            <div className="flex flex-wrap gap-2 pt-1">
-              {project.tech.map((technology) => (
+            {/* Tech Stack Pills (Limited to 4-5 core technologies for minimal look) */}
+            <div className="flex flex-wrap gap-2 pt-0.5">
+              {project.tech.slice(0, 5).map((technology) => (
                 <span
                   key={technology}
-                  className={`font-mono text-[11px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-sm border transition-colors ${
+                  className={`font-mono text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 border transition-colors ${
                     isAuraActive
                       ? 'bg-zinc-900/80 text-zinc-300 border-zinc-700/80 hover:border-[#FF5500]/60'
-                      : 'bg-white/90 text-zinc-800 border-zinc-300/90 shadow-2xs'
+                      : 'bg-white/80 text-zinc-700 border-zinc-300/80 shadow-2xs'
                   }`}
                 >
                   {technology}
@@ -149,16 +152,16 @@ export function ProjectDetailPage({
             </div>
 
             {/* Action Buttons (Live Site + GitHub) */}
-            <div className="flex flex-wrap items-center gap-3 pt-3">
+            <div className="flex flex-wrap items-center gap-3 pt-2">
               {project.liveDemo && (
                 <a
                   href={project.liveDemo}
                   target="_blank"
                   rel="noreferrer"
-                  className={`inline-flex items-center gap-2 px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider text-white rounded-sm shadow-md transition-all cursor-pointer active:scale-95 ${
+                  className={`inline-flex items-center gap-2 px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-sm transition-all cursor-pointer active:scale-95 ${
                     isAuraActive
                       ? 'bg-[#FF5500] hover:bg-[#E04B00] shadow-[0_0_20px_rgba(255,85,0,0.4)]'
-                      : 'bg-[#0891B2] hover:bg-[#0E7490]'
+                      : 'bg-[#007D8B] hover:bg-[#006672]'
                   }`}
                 >
                   <span>LIVE SITE</span>
@@ -170,10 +173,10 @@ export function ProjectDetailPage({
                 href={project.link}
                 target="_blank"
                 rel="noreferrer"
-                className={`inline-flex items-center gap-2 px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider rounded-sm border transition-all cursor-pointer active:scale-95 ${
+                className={`inline-flex items-center gap-2 px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider border transition-all cursor-pointer active:scale-95 ${
                   isAuraActive
                     ? 'border-zinc-700 bg-zinc-900/70 hover:bg-zinc-800 text-white'
-                    : 'border-zinc-400 bg-white/70 hover:bg-zinc-100 text-zinc-900 shadow-2xs'
+                    : 'border-zinc-400/80 bg-white/70 hover:bg-zinc-100 text-zinc-900 shadow-2xs'
                 }`}
               >
                 <span>GITHUB REPO</span>
@@ -205,7 +208,7 @@ export function ProjectDetailPage({
 
             {/* Gallery Thumbnails if available */}
             {project.gallery && project.gallery.length > 1 && (
-              <div className="flex items-center gap-2.5 mt-4 w-full overflow-x-auto pb-1">
+              <div className="flex items-center gap-2.5 mt-3.5 w-full overflow-x-auto pb-1">
                 {project.gallery.map((imgSrc, idx) => {
                   const isSelected = selectedImage === imgSrc;
                   return (
@@ -216,7 +219,7 @@ export function ProjectDetailPage({
                         isSelected
                           ? isAuraActive
                             ? 'border-[#FF5500] scale-105 shadow-[0_0_10px_rgba(255,85,0,0.4)]'
-                            : 'border-[#0891B2] scale-105 shadow-sm'
+                            : 'border-[#007D8B] scale-105 shadow-sm'
                           : 'border-zinc-300/60 dark:border-zinc-800 opacity-60 hover:opacity-100'
                       }`}
                     >
@@ -230,58 +233,59 @@ export function ProjectDetailPage({
         </div>
 
         {/* ─── Bottom Metrics Section with Corner Brackets (HUD Tech aesthetic) ─── */}
-        <div className="pt-10 border-t border-zinc-300/70 dark:border-zinc-800/80">
+        <div className="pt-8 border-t border-zinc-300/60 dark:border-zinc-800/80">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {metrics.map((metric, idx) => (
               <div
                 key={idx}
-                className="relative p-6 sm:p-7 select-none transition-all duration-300 group"
+                className="relative p-5 sm:p-7 select-none transition-all duration-300 group"
               >
                 {/* ⌜ Top-Left Bracket */}
                 <span
-                  className={`absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 transition-colors ${
+                  className={`absolute top-0 left-0 w-3 h-3 border-t-[1.5px] border-l-[1.5px] transition-colors ${
                     isAuraActive
                       ? 'border-zinc-500 group-hover:border-[#FF5500]'
-                      : 'border-zinc-800 group-hover:border-[#0891B2]'
+                      : 'border-zinc-800 group-hover:border-[#007D8B]'
                   }`}
                 />
                 {/* ⌝ Top-Right Bracket */}
                 <span
-                  className={`absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 transition-colors ${
+                  className={`absolute top-0 right-0 w-3 h-3 border-t-[1.5px] border-r-[1.5px] transition-colors ${
                     isAuraActive
                       ? 'border-zinc-500 group-hover:border-[#FF5500]'
-                      : 'border-zinc-800 group-hover:border-[#0891B2]'
+                      : 'border-zinc-800 group-hover:border-[#007D8B]'
                   }`}
                 />
                 {/* ⌞ Bottom-Left Bracket */}
                 <span
-                  className={`absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 transition-colors ${
+                  className={`absolute bottom-0 left-0 w-3 h-3 border-b-[1.5px] border-l-[1.5px] transition-colors ${
                     isAuraActive
                       ? 'border-zinc-500 group-hover:border-[#FF5500]'
-                      : 'border-zinc-800 group-hover:border-[#0891B2]'
+                      : 'border-zinc-800 group-hover:border-[#007D8B]'
                   }`}
                 />
                 {/* ⌟ Bottom-Right Bracket */}
                 <span
-                  className={`absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 transition-colors ${
+                  className={`absolute bottom-0 right-0 w-3 h-3 border-b-[1.5px] border-r-[1.5px] transition-colors ${
                     isAuraActive
                       ? 'border-zinc-500 group-hover:border-[#FF5500]'
-                      : 'border-zinc-800 group-hover:border-[#0891B2]'
+                      : 'border-zinc-800 group-hover:border-[#007D8B]'
                   }`}
                 />
 
                 {/* Big Bold Stat / Number */}
                 <div
-                  className={`font-heading font-black text-4xl sm:text-5xl lg:text-6xl leading-none mb-3 transition-colors ${
-                    isAuraActive ? 'text-[#FF5500]' : 'text-[#0891B2]'
+                  className={`font-heading font-black text-5xl sm:text-6xl lg:text-7xl leading-none mb-3 transition-colors ${
+                    isAuraActive ? 'text-[#FF5500]' : 'text-[#007D8B]'
                   }`}
+                  style={{ fontStretch: '75%' }}
                 >
                   {metric.value}
                 </div>
 
                 {/* Short Description Underneath */}
                 <p
-                  className={`font-sans text-xs sm:text-sm leading-relaxed ${
+                  className={`font-sans text-xs sm:text-[13px] leading-relaxed ${
                     isAuraActive ? 'text-zinc-400' : 'text-zinc-600'
                   }`}
                 >
