@@ -1,0 +1,280 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ─── Font Face ───────────────────────────────────────────── */
+@font-face {
+  font-family: "FSP DEMO - PODIUM Sharp 4.11";
+  src: url("https://db.onlinewebfonts.com/t/8b75d9dcff6a48c35a46656192adf019.eot");
+  src: url("https://db.onlinewebfonts.com/t/8b75d9dcff6a48c35a46656192adf019.eot?#iefix") format("embedded-opentype"),
+       url("https://db.onlinewebfonts.com/t/8b75d9dcff6a48c35a46656192adf019.woff2") format("woff2"),
+       url("https://db.onlinewebfonts.com/t/8b75d9dcff6a48c35a46656192adf019.woff") format("woff"),
+       url("https://db.onlinewebfonts.com/t/8b75d9dcff6a48c35a46656192adf019.ttf") format("truetype"),
+       url("https://db.onlinewebfonts.com/t/8b75d9dcff6a48c35a46656192adf019.svg#FSP DEMO - PODIUM Sharp 4.11") format("svg");
+  font-display: swap;
+}
+
+/* ─── Custom Theme Tokens ─────────────────────────────────── */
+@theme {
+  --font-sans: 'Onest', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-onest: 'Onest', sans-serif;
+  --font-heading: 'Bricolage Grotesque', sans-serif;
+  --font-display: 'Bricolage Grotesque', sans-serif;
+  --font-bricolage: 'Bricolage Grotesque', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --font-inter: 'Inter', sans-serif;
+  --font-space: 'Space Grotesk', sans-serif;
+}
+
+/* ─── Base Styles ─────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Onest', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #ffffff;
+  color: #18181b;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#root {
+  min-height: 100%;
+  width: 100%;
+}
+
+/* Headings, Main Titles & Subtitles: Bricolage Grotesque */
+h1, h2, h3, h4, h5, h6,
+h1.font-sans, h2.font-sans, h3.font-sans, h4.font-sans, h5.font-sans, h6.font-sans,
+.font-heading,
+.font-display,
+.font-bricolage {
+  font-family: 'Bricolage Grotesque', sans-serif !important;
+}
+
+/* Normal & Body text: Onest */
+.font-onest {
+  font-family: 'Onest', sans-serif;
+}
+
+.font-mono {
+  font-family: 'Space Mono', monospace;
+}
+
+.font-space {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Custom Fiery Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0B10;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #FF6600, #FF2200);
+  border-radius: 9999px;
+  box-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FFB703;
+  box-shadow: 0 0 15px rgba(255, 183, 3, 0.8);
+}
+
+.font-podium {
+  font-family: 'FSP DEMO - PODIUM Sharp 4.11', 'Impact', sans-serif;
+}
+
+.font-inter {
+  font-family: 'Inter', sans-serif;
+}
+
+.font-chakra {
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+.font-syne {
+  font-family: 'Syne', sans-serif;
+}
+
+/* ─── CSS Animations ──────────────────────────────────────── */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-fade-up-delay-1 {
+  animation: fade-up 0.8s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+.animate-fade-up-delay-2 {
+  animation: fade-up 0.8s ease-out 0.4s forwards;
+  opacity: 0;
+}
+
+.animate-fade-up-delay-3 {
+  animation: fade-up 0.8s ease-out 0.6s forwards;
+  opacity: 0;
+}
+
+.animate-fade-up-delay-4 {
+  animation: fade-up 0.8s ease-out 0.8s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out forwards;
+}
+
+.animate-fade-in-delay {
+  animation: fade-in 0.8s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.8s ease-out forwards;
+}
+
+/* ─── Ghost Rider Flaming Keyframes & Burning Styles ──────── */
+@keyframes flame-glow {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(255, 69, 0, 0.6), inset 0 0 15px rgba(255, 100, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 45px rgba(255, 69, 0, 0.9), inset 0 0 25px rgba(255, 120, 0, 0.5);
+  }
+}
+
+@keyframes ember-float {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.8);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.9;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-400px) translateX(30px) scale(0.2);
+    opacity: 0;
+  }
+}
+
+.ghost-flame-active {
+  animation: flame-glow 2s infinite ease-in-out;
+}
+
+/* ─── Burning Fire Theme Glassmorphism ───────────────────── */
+.fire-glass {
+  background: rgba(13, 14, 21, 0.78);
+  border: 1px solid rgba(255, 85, 0, 0.22);
+  box-shadow: 
+    0 15px 35px -10px rgba(0, 0, 0, 0.7),
+    inset 0 1px 1px rgba(255, 120, 0, 0.2),
+    inset 0 -1px 2px rgba(255, 60, 0, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.fire-glass:hover {
+  border-color: rgba(255, 85, 0, 0.65);
+  box-shadow: 
+    0 0 30px rgba(255, 69, 0, 0.25),
+    inset 0 1px 2px rgba(255, 150, 0, 0.35);
+}
+
+.fire-gradient-text {
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFE0B2 30%, #FF9900 65%, #FF4500 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.fire-text-glow {
+  text-shadow: 0 0 20px rgba(255, 85, 0, 0.7), 0 0 40px rgba(255, 136, 0, 0.4);
+}
+
+/* ─── Reference.mp4 Aura Portal Lens Styles ───────────────── */
+@keyframes aura-ring-pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    box-shadow: 
+      0 0 16px #FFB703,
+      0 0 32px #FF6600,
+      0 0 55px rgba(255, 69, 0, 0.75),
+      inset 0 0 20px rgba(255, 183, 3, 0.6);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.04) rotate(180deg);
+    box-shadow: 
+      0 0 24px #FFE500,
+      0 0 45px #FF5500,
+      0 0 70px rgba(255, 85, 0, 0.9),
+      inset 0 0 30px rgba(255, 210, 0, 0.75);
+  }
+}
+
+.aura-lens-ring {
+  animation: aura-ring-pulse 3s infinite ease-in-out;
+  border: 3.5px solid rgba(255, 220, 0, 0.95);
+  border-radius: 50% 48% 52% 49% / 49% 51% 48% 52%;
+}
+
+/* ─── LightBeam Button Rotating Beam Keyframes ───────────── */
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes border-spin {
+  from { --gradient-angle: 0deg; }
+  to { --gradient-angle: 360deg; }
+}
+
+.animate-border-spin {
+  animation: border-spin 2.2s linear infinite;
+}
+
+
+
