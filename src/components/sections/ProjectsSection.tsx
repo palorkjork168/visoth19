@@ -39,8 +39,8 @@ const projects: Project[] = [
   {
     id: 'cv-builder',
     codename: 'PRODUCTIVITY // 01',
-    title: 'CV Builder',
-    subtitle: 'Professional Resume Engineering',
+    title: 'ResumeForge',
+    subtitle: 'ATS Resume Engineering',
     desc: 'A web application that allows users to create professional CVs by entering personal information, educational background, skills, and work experience.',
     image: proj2,
     tech: ['React 19', 'TypeScript', 'Tailwind CSS 4', 'Node.js', 'Express.js', 'PostgreSQL'],
@@ -52,8 +52,8 @@ const projects: Project[] = [
   {
     id: 'qr-generator',
     codename: 'DEV TOOL // 02',
-    title: 'QR Code Generator',
-    subtitle: 'Dynamic Link Encoding Platform',
+    title: 'QR Studio',
+    subtitle: 'Dynamic Vector & Matrix Engine',
     desc: 'A web application that generates QR codes from user-provided URLs, making it easier to share and access links through mobile devices.',
     image: qrImg,
     tech: ['React', 'TypeScript', 'Tailwind CSS'],
@@ -65,9 +65,9 @@ const projects: Project[] = [
   {
     id: 'employee-attendance',
     codename: 'WORKFORCE // 03',
-    title: 'Employee Attendance System',
+    title: 'NectarHub HR',
     subtitle: 'Biometric & Shift Tracking Architecture',
-    desc: 'A system for recording employee attendance, check-in and check-out times, and detailed attendance history records.',
+    desc: 'A workforce tracking and HR management system featuring centralized administrative dashboards, employee check-in and check-out logs, job board portals, and attendance analytics.',
     image: attendanceImg,
     tech: ['React', 'TypeScript', 'Node.js', 'Express.js', 'PostgreSQL'],
     features: ['Check-in / Check-out Logs', 'Timesheet Calculations', 'PostgreSQL History Store', 'Role Auditing'],
@@ -76,21 +76,9 @@ const projects: Project[] = [
     isPinned: true,
   },
   {
-    id: 'employee-mgmt',
-    codename: 'ENTERPRISE // 04',
-    title: 'Employee Management System',
-    subtitle: 'HR & Organization Portal',
-    desc: 'A web-based application for managing employee information, departments, and workforce records with role-based access for administrators, HR, and staff.',
-    image: proj3,
-    tech: ['React 19', 'TypeScript', 'TanStack React Query', 'Node.js', 'Express.js 5', 'PostgreSQL', 'Sequelize ORM', 'JWT'],
-    features: ['Department Directory', 'RBAC Security Guard', 'TanStack Data Cache', 'Sequelize Relational Schema'],
-    accent: 'cyan',
-    githubUrl: 'https://github.com/palorkjork168',
-  },
-  {
     id: 'pos-system',
-    codename: 'COMMERCE // 05',
-    title: 'Mini Mart POS System',
+    codename: 'COMMERCE // 04',
+    title: 'MartPulse POS',
     subtitle: 'Retail & Transaction Control',
     desc: 'A point-of-sale system designed for small retail businesses to manage product inventory, customer transactions, and daily sales performance.',
     image: proj1,
@@ -101,8 +89,8 @@ const projects: Project[] = [
   },
   {
     id: 'school-mgmt',
-    codename: 'EDTECH // 06',
-    title: 'School Management System',
+    codename: 'EDTECH // 05',
+    title: 'EduSphere',
     subtitle: 'Campus Administration System',
     desc: 'A web application designed to organize school information, including student records, teacher information, class management, and attendance.',
     image: schoolImg,
@@ -113,8 +101,8 @@ const projects: Project[] = [
   },
   {
     id: 'cinema-mgmt',
-    codename: 'ENTERTAINMENT // 07',
-    title: 'Cinema Management System',
+    codename: 'ENTERTAINMENT // 06',
+    title: 'CinePass',
     subtitle: 'Box Office & Ticket Booking Platform',
     desc: 'An application for organizing movie information, screening schedules, seat availability matrices, and ticket reservations.',
     image: cinemaImg,
@@ -125,8 +113,8 @@ const projects: Project[] = [
   },
   {
     id: 'hotel-mgmt',
-    codename: 'HOSPITALITY // 08',
-    title: 'Hotel Management System',
+    codename: 'HOSPITALITY // 07',
+    title: 'HavenStay',
     subtitle: 'Room Reservation & Guest Concierge',
     desc: 'A web application for managing hotel rooms, guest reservations, booking statuses, and automated check-in/out workflows.',
     image: hotelImg,
@@ -165,7 +153,7 @@ export function ProjectsSection() {
           </FadeIn>
 
           <FadeIn delay={0.2} y={20}>
-            <h2 className="font-gamer font-black uppercase tracking-[0.1em] text-[clamp(2.2rem,6vw,4rem)] text-white drop-shadow-[0_4px_25px_rgba(255,255,255,0.2)] flex items-center justify-center gap-3">
+            <h2 className="font-gamer font-black uppercase tracking-[0.1em] text-[clamp(2.2rem,6vw,4rem)] text-white flex items-center justify-center gap-3">
               <span className="text-white/40 font-light">&mdash;</span>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#E2E8F0] to-[#94A3B8]">
                 GAME PLAY

@@ -32,9 +32,9 @@ export function AboutSection() {
 
         {/* Section Title matching "THE MAGICCRAFT" */}
         <FadeIn delay={0.2} y={20}>
-          <h2 className="font-gamer font-black uppercase tracking-wider text-[clamp(2.4rem,6vw,4.5rem)] text-white mb-12 drop-shadow-[0_2px_20px_rgba(255,255,255,0.15)] flex flex-wrap items-center gap-3">
+          <h2 className="font-gamer font-black uppercase tracking-wider text-[clamp(2.4rem,6vw,4.5rem)] text-white mb-12 flex flex-wrap items-center gap-3">
             <span>THE</span>
-            <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-[#FF5500] via-[#FFB703] to-[#FB5607] drop-shadow-[0_0_25px_rgba(255,85,0,0.6)]">
+            <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-[#FF5500] via-[#FFB703] to-[#FB5607]">
               HELLFIRE CODER
             </span>
           </h2>

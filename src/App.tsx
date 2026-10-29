@@ -22,6 +22,7 @@ import { ProjectDetailPage } from './components/pages/ProjectDetailPage';
 import { RevealOnScroll } from './components/ui/RevealOnScroll';
 import { ProjectPreviewPlaceholder } from './components/ui/ProjectPreviewPlaceholder';
 import { DynamicGridWaveCanvas } from './components/ui/DynamicGridWaveCanvas';
+import { HorizontalProjectsSection } from './components/sections/HorizontalProjectsSection';
 
 // ─── Precision Social SVG Icons ─────────────────────────────────────
 function GithubIcon({ className = 'w-4 h-4' }: { className?: string }) {
@@ -327,169 +328,12 @@ export default function App() {
         </RevealOnScroll>
       </section>
 
-      {/* ─── 4. PROJECTS SECTION WITH MAGIC BENTO ─── */}
-      <section
-        id="projects"
-        className={`w-full py-24 sm:py-32 px-5 sm:px-8 transition-colors duration-500 border-t relative overflow-hidden ${
-          isAuraGlobal ? 'bg-[#0E0F14] border-zinc-800' : 'bg-zinc-50 border-zinc-200'
-        }`}
-      >
-        <span id="courses" className="absolute -top-24 sr-only" />
-
-        {/* Subtle Ambient Wavy Grid Background */}
-        <DynamicGridWaveCanvas isAuraActive={isAuraGlobal} opacity={0.85} />
-
-        <div className="max-w-6xl mx-auto relative z-10">
-          {/* Section Header */}
-          <RevealOnScroll direction="up" delay={40}>
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
-              <div>
-                <h2
-                  className={`font-heading font-black text-3xl sm:text-5xl tracking-tight mb-2 ${
-                    isAuraGlobal ? 'text-white' : 'text-black'
-                  }`}
-                >
-                  PROJECTS
-                </h2>
-                <p
-                  className={`font-mono text-xs sm:text-sm ${
-                    isAuraGlobal ? 'text-zinc-400' : 'text-zinc-500'
-                  }`}
-                >
-                  Selected web applications &amp; systems
-                </p>
-              </div>
-            </div>
-          </RevealOnScroll>
-
-          {/* Clean Minimal Projects Grid with staggered scroll reveal */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {allProjects.map((project, idx) => (
-              <RevealOnScroll key={project.id} direction="up" delay={(idx % 3) * 100}>
-                <MagicBentoCard
-                  isAuraActive={isAuraGlobal}
-                  enableTilt={false}
-                  enableMagnetism={false}
-                  onClick={() => navigateToProject(project.id)}
-                  className={`rounded-2xl border overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 cursor-pointer h-full ${
-                    project.isPinned
-                      ? isAuraGlobal
-                        ? 'bg-zinc-900/85 border-[#FF5500]/40 shadow-[0_4px_25px_rgba(255,85,0,0.15)] hover:border-[#FF5500]/80'
-                        : 'bg-white border-[#FF5500]/40 shadow-md hover:border-[#FF5500]/70'
-                      : isAuraGlobal
-                      ? 'bg-zinc-900/70 border-zinc-800 hover:border-zinc-700'
-                      : 'bg-white border-zinc-200 shadow-sm hover:border-zinc-300'
-                  }`}
-                >
-                  {/* Image Cover or Sleek Coming Soon Placeholder */}
-                  <div className="relative aspect-[16/10] overflow-hidden bg-zinc-100 dark:bg-zinc-800 group">
-                    {project.image ? (
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    ) : (
-                      <ProjectPreviewPlaceholder
-                        title={project.title}
-                        category={project.category}
-                        isAuraActive={isAuraGlobal}
-                        variant="card"
-                      />
-                    )}
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-6 flex-1 flex flex-col justify-between">
-                    <div>
-                      <h3
-                        className={`font-heading font-bold text-xl mb-2 transition-colors ${
-                          isAuraGlobal
-                            ? 'text-white group-hover:text-[#FF5500]'
-                            : 'text-zinc-900 group-hover:text-[#FF5500]'
-                        }`}
-                      >
-                        {project.title}
-                      </h3>
-                      <p
-                        className={`text-xs sm:text-sm leading-relaxed mb-5 line-clamp-2 ${
-                          isAuraGlobal ? 'text-zinc-400' : 'text-zinc-600'
-                        }`}
-                      >
-                        {project.shortDesc || project.desc}
-                      </p>
-                    </div>
-
-                    <div>
-                      {/* Minimal Tech Tags (Top 3 essential stack) */}
-                      <div className="flex flex-wrap gap-1.5 mb-5">
-                        {project.tech.slice(0, 3).map((t) => (
-                          <span
-                            key={t}
-                            className={`font-mono text-[10px] px-2 py-0.5 rounded font-medium ${
-                              isAuraGlobal
-                                ? 'bg-zinc-800/90 text-zinc-300 border border-zinc-700/50'
-                                : 'bg-zinc-100 text-zinc-700 border border-zinc-200'
-                            }`}
-                          >
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Actions */}
-                      <div
-                        className={`pt-4 border-t flex items-center justify-between ${
-                          isAuraGlobal ? 'border-zinc-800' : 'border-zinc-100'
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <a
-                            href={project.link}
-                            onClick={(e) => e.stopPropagation()}
-                            target="_blank"
-                            rel="noreferrer"
-                            className={`inline-flex items-center gap-1.5 font-mono text-xs font-bold hover:text-[#FF5500] transition-colors ${
-                              isAuraGlobal ? 'text-white' : 'text-black'
-                            }`}
-                          >
-                            <span>VIEW REPO</span>
-                            <GithubIcon className="w-3.5 h-3.5" />
-                          </a>
-
-                          {project.liveDemo && (
-                            <a
-                              href={project.liveDemo}
-                              onClick={(e) => e.stopPropagation()}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="inline-flex items-center gap-1 font-mono text-xs font-bold text-[#FF5500] hover:underline"
-                            >
-                              <span>DEMO</span>
-                              <ExternalLink className="w-3 h-3" />
-                            </a>
-                          )}
-                        </div>
-
-                        <LightBeamButton
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            navigateToProject(project.id);
-                          }}
-                          isDark={isAuraGlobal}
-                          className="px-3.5 py-1 text-[11px] font-mono font-bold"
-                        >
-                          <span>Details &rarr;</span>
-                        </LightBeamButton>
-                      </div>
-                    </div>
-                  </div>
-                </MagicBentoCard>
-              </RevealOnScroll>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ─── 4. HORIZONTAL PINNED PROJECTS SHOWCASE ─── */}
+      <HorizontalProjectsSection
+        projects={allProjects}
+        isAuraActive={isAuraGlobal}
+        onNavigateToProject={navigateToProject}
+      />
 
       {/* ─── 5. ROAD SCROLLING EXPERIENCE TIMELINE ─── */}
       <RoadExperienceTimeline isAuraActive={isAuraGlobal} />

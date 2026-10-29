@@ -43,15 +43,15 @@ export function HeroSection({ isAuraActive, onAuraToggle, onOpenResume }: HeroSe
       <LensFlareOverlay isAuraActive={isFullAura} />
 
       {/* Top spacing buffer for global floating pill navbar */}
-      <div className="h-16 sm:h-20 w-full shrink-0 pointer-events-none" />
+      <div className="h-24 sm:h-28 lg:h-20 w-full shrink-0 pointer-events-none" />
 
       {/* ─── Hero Canvas with Expanded Breathing Room (Name far left, Portrait center, Features far right) ─── */}
-      <div className="relative w-full max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-12 xl:px-16 my-auto flex flex-col lg:flex-row items-center justify-between min-h-[640px] lg:min-h-[780px] xl:min-h-[860px] 2xl:min-h-[920px] gap-8">
+      <div className="relative w-full max-w-[1680px] mx-auto px-5 sm:px-10 lg:px-12 xl:px-16 my-auto flex flex-col lg:flex-row items-center justify-between min-h-[auto] lg:min-h-[780px] xl:min-h-[860px] 2xl:min-h-[920px] gap-8">
         
         {/* ─── LEFT: Big Bold Full Name "CHOU SEREYVISOTH" + Dynamic Animated Title (Pushed Left) ─── */}
-        <div className="relative z-10 flex flex-col justify-center max-w-md lg:max-w-lg xl:max-w-xl pointer-events-none select-none order-2 lg:order-1 lg:pl-2 xl:pl-4 animate-fade-up">
+        <div className="relative z-10 flex flex-col justify-center w-full max-w-md lg:max-w-lg xl:max-w-xl pointer-events-none select-none order-1 lg:pl-2 xl:pl-4 animate-fade-up">
           <div
-            className={`font-heading font-black tracking-tighter text-[clamp(3.5rem,7.5vw,8.5rem)] leading-[0.84] transition-colors duration-500 ${
+            className={`font-heading font-black tracking-tighter text-[clamp(2.75rem,8vw,8.5rem)] leading-[0.88] transition-colors duration-500 ${
               isFullAura ? 'text-white' : 'text-black'
             }`}
           >
@@ -69,7 +69,7 @@ export function HeroSection({ isAuraActive, onAuraToggle, onOpenResume }: HeroSe
                 Y
               </span>
             </div>
-            <div className="tracking-tight text-[#FF5500] flex items-center gap-2 sm:gap-3 drop-shadow-[0_2px_14px_rgba(255,85,0,0.35)]">
+            <div className="tracking-tight text-[#FF5500] flex items-center gap-2 sm:gap-3">
               <span className="flex items-baseline">
                 <span>VISOT</span>
                 <span
@@ -83,22 +83,22 @@ export function HeroSection({ isAuraActive, onAuraToggle, onOpenResume }: HeroSe
                   H
                 </span>
               </span>
-              <span className="inline-block w-3.5 h-3.5 sm:w-5 sm:h-5 rounded-full bg-[#FF5500] animate-pulse shadow-[0_0_15px_#FF5500]" />
+              <span className="inline-block w-3.5 h-3.5 sm:w-5 sm:h-5 rounded-full bg-[#FF5500]" />
             </div>
           </div>
 
           {/* Dynamic Animated Typewriter Title (Kept at z-30 for pristine foreground legibility) */}
-          <div className="mt-8 pointer-events-auto relative z-30">
+          <div className="mt-4 sm:mt-8 pointer-events-auto relative z-30">
             <TypewriterTitle isAuraActive={isFullAura} />
           </div>
         </div>
 
-        {/* ─── CENTER: Portrait Stage + Realistic Back Shadow + WebGL Liquid Reveal (Enlarged Commanding Portrait) ─── */}
-        <div className="relative lg:absolute left-1/2 lg:-translate-x-1/2 bottom-0 w-[420px] sm:w-[580px] md:w-[720px] lg:w-[900px] xl:w-[1040px] 2xl:w-[1160px] h-[560px] sm:h-[660px] md:h-[760px] lg:h-[860px] xl:h-[930px] 2xl:h-[980px] flex items-end justify-center z-20 pointer-events-none order-1 lg:order-2">
+        {/* ─── CENTER: Portrait Stage + Realistic Back Shadow + WebGL Liquid Reveal ─── */}
+        <div className="relative left-1/2 -translate-x-1/2 lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:bottom-0 w-[420px] xs:w-[480px] sm:w-[580px] md:w-[720px] lg:w-[900px] xl:w-[1040px] 2xl:w-[1160px] h-[390px] xs:h-[440px] sm:h-[500px] md:h-[640px] lg:h-[860px] xl:h-[930px] 2xl:h-[980px] flex items-end justify-center z-20 pointer-events-none order-2 my-2 lg:my-0">
           
           {/* 1. Deep Silhouette Back Shadow & Ambient Hellfire Bloom */}
           <div
-            className={`absolute left-1/2 -translate-x-1/2 bottom-4 w-[360px] sm:w-[500px] md:w-[640px] lg:w-[780px] xl:w-[880px] h-[440px] sm:h-[540px] lg:h-[660px] xl:h-[740px] rounded-full pointer-events-none transition-all duration-700 blur-[90px] ${
+            className={`absolute left-1/2 -translate-x-1/2 bottom-3 sm:bottom-4 w-[320px] xs:w-[380px] sm:w-[480px] md:w-[600px] lg:w-[780px] xl:w-[880px] h-[300px] xs:h-[350px] sm:h-[420px] md:h-[540px] lg:h-[660px] xl:h-[740px] rounded-full pointer-events-none transition-all duration-700 blur-[50px] sm:blur-[70px] lg:blur-[90px] ${
               isFullAura
                 ? 'bg-gradient-to-t from-[#FF2200]/90 via-[#FF7700]/70 to-[#FFAA00]/50 scale-125 opacity-100'
                 : 'bg-black/35 opacity-50 scale-100'
@@ -130,7 +130,7 @@ export function HeroSection({ isAuraActive, onAuraToggle, onOpenResume }: HeroSe
         </div>
 
         {/* ─── RIGHT: Glassmorphic Project Highlights & 3D Aura Button (Pushed Right) ─── */}
-        <div className="relative z-30 flex flex-col items-start lg:items-end text-left lg:text-right font-mono select-none space-y-3.5 max-w-xs sm:max-w-sm order-3 pointer-events-auto lg:pr-2 xl:pr-4 animate-fade-up-delay-1">
+        <div className="relative z-30 flex flex-col items-start lg:items-end text-left lg:text-right font-mono select-none space-y-3.5 w-full max-w-sm order-3 pointer-events-auto lg:pr-2 xl:pr-4 animate-fade-up-delay-1">
           
           {/* Latest project glassmorphic card */}
           <div
@@ -248,10 +248,8 @@ export function HeroSection({ isAuraActive, onAuraToggle, onOpenResume }: HeroSe
             isFullAura ? 'text-zinc-400 hover:text-orange-400' : 'text-zinc-400 hover:text-black'
           }`}
         >
-          <span>Scroll to explore</span>
-          <svg className="w-4 h-4 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
+          
+
         </a>
       </div>
     </section>

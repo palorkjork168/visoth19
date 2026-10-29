@@ -33,7 +33,7 @@ function MarqueeRow({ items, reverse = false }: { items: string[]; reverse?: boo
                 isSlash
                   ? 'text-[#FF5500]/40 font-mono'
                   : isHighlight
-                  ? 'text-[#FF8800] drop-shadow-[0_0_8px_#FF5500] font-black'
+                  ? 'text-[#FF8800] font-black'
                   : 'text-white/60'
               }`}
             >

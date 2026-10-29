@@ -74,7 +74,7 @@ export function SkillsSection() {
           </FadeIn>
 
           <FadeIn delay={0.2} y={20}>
-            <h2 className="font-gamer font-black uppercase tracking-[0.1em] text-[clamp(2.2rem,6vw,4rem)] text-white drop-shadow-[0_4px_25px_rgba(255,255,255,0.2)] flex items-center justify-center gap-3">
+            <h2 className="font-gamer font-black uppercase tracking-[0.1em] text-[clamp(2.2rem,6vw,4rem)] text-white flex items-center justify-center gap-3">
               <span className="text-white/40 font-light">&mdash;</span>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#E2E8F0] to-[#94A3B8]">
                 TECH 

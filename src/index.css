@@ -29,7 +29,6 @@
 /* ─── Base Styles ─────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
-  height: 100%;
 }
 
 body {
@@ -40,8 +39,7 @@ body {
   font-family: 'Onest', -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: #ffffff;
   color: #18181b;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow-x: clip;
 }
 
 #root {
@@ -231,7 +229,7 @@ h1.font-sans, h2.font-sans, h3.font-sans, h4.font-sans, h5.font-sans, h6.font-sa
 }
 
 .fire-text-glow {
-  text-shadow: 0 0 20px rgba(255, 85, 0, 0.7), 0 0 40px rgba(255, 136, 0, 0.4);
+  text-shadow: none;
 }
 
 /* ─── Reference.mp4 Aura Portal Lens Styles ───────────────── */

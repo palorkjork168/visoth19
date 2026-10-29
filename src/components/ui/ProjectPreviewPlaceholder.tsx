@@ -85,21 +85,6 @@ export const ProjectPreviewPlaceholder: React.FC<ProjectPreviewPlaceholderProps>
         >
           {category ? `${category} · UI In Progress` : 'Live UI showcase in development'}
         </p>
-
-        {/* Live Loading Indicator Pill */}
-        <div
-          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-medium mt-3 border ${
-            isAuraActive
-              ? 'bg-[#FF5500]/10 border-[#FF5500]/30 text-[#FF5500]'
-              : 'bg-orange-50 border-orange-200 text-[#FF5500]'
-          }`}
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF5500] opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF5500]" />
-          </span>
-          <span>BUILDING SHOWCASE...</span>
-        </div>
       </div>
     </div>
   );

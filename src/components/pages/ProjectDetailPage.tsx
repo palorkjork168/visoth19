@@ -60,18 +60,6 @@ export function ProjectDetailPage({
       {/* ─── Ambient Wavy Grid Background ─── */}
       <DynamicGridWaveCanvas isAuraActive={isAuraActive} opacity={0.8} />
 
-      {/* ─── Original Clean Subtle Ambient Glow (Matches our Portfolio Identity) ─── */}
-      <div
-        className={`absolute top-20 left-1/4 w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none transition-all duration-700 ${
-          isAuraActive ? 'bg-[#FF5500]/12 opacity-80' : 'bg-[#FF5500]/5 opacity-60'
-        }`}
-      />
-      <div
-        className={`absolute bottom-20 right-10 w-[400px] h-[400px] rounded-full blur-[120px] pointer-events-none transition-all duration-700 ${
-          isAuraActive ? 'bg-orange-600/10 opacity-70' : 'bg-zinc-200/50 opacity-40'
-        }`}
-      />
-
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* ─── Top Return Bar ─── */}
         <div className="flex items-center justify-between mb-8 pb-3 border-b border-zinc-200/80 dark:border-zinc-800">
@@ -95,7 +83,7 @@ export function ProjectDetailPage({
         {/* ─── Hero Section: Left Text + Right Chamfered Image ─── */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center mb-14 lg:mb-18">
           {/* Left Column: Meta, Giant Title, Short Info, Tech Stack, and CTA */}
-          <div className="lg:col-span-7 flex flex-col items-start space-y-5">
+          <div className="lg:col-span-7 min-w-0 w-full flex flex-col items-start space-y-5">
             {/* Meta Category Tag */}
             <div className="flex items-center gap-2 font-mono text-[11px] font-semibold tracking-widest uppercase text-zinc-500 dark:text-zinc-400">
               <span className="text-[#FF5500] font-bold">—</span>
@@ -106,15 +94,15 @@ export function ProjectDetailPage({
               <span>{project.year || '2025'}</span>
             </div>
 
-            {/* Giant Bold Two-Line Title with Condensed Stretch */}
+            {/* Clean Bold Two-Line Title with responsive sizing */}
             <h1
-              className="font-heading font-black text-6xl sm:text-7xl md:text-8xl lg:text-[5.8rem] tracking-tight leading-[0.86] select-none uppercase"
-              style={{ fontStretch: '75%' }}
+              className="font-heading font-black text-3xl sm:text-4xl md:text-5xl lg:text-[2.8rem] xl:text-[3.4rem] tracking-tight leading-[1] select-none uppercase break-words max-w-full"
+              style={{ fontStretch: '80%' }}
             >
-              <span className={`block ${isAuraActive ? 'text-white' : 'text-zinc-950'}`}>
+              <span className={`block break-words ${isAuraActive ? 'text-white' : 'text-zinc-950'}`}>
                 {titleLine1}
               </span>
-              <span className="block text-[#FF5500] drop-shadow-[0_2px_18px_rgba(255,85,0,0.35)]">
+              <span className="block break-words text-[#FF5500]">
                 {titleLine2}
               </span>
             </h1>
@@ -144,14 +132,14 @@ export function ProjectDetailPage({
               ))}
             </div>
 
-            {/* Action Buttons (Our Signature Electric Orange + Dark Minimal) */}
+            {/* Action Buttons (Crisp Minimalist CTA) */}
             <div className="flex flex-wrap items-center gap-3 pt-2">
               {project.liveDemo && (
                 <a
                   href={project.liveDemo}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider text-white bg-[#FF5500] hover:bg-[#E04B00] shadow-[0_4px_18px_rgba(255,85,0,0.3)] transition-all cursor-pointer active:scale-95"
+                  className="inline-flex items-center gap-2 px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider text-white bg-[#FF5500] hover:bg-[#E04B00] transition-all cursor-pointer active:scale-95"
                 >
                   <span>LIVE SITE</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -215,7 +203,7 @@ export function ProjectDetailPage({
                       onClick={() => setSelectedImage(imgSrc)}
                       className={`relative w-16 sm:w-20 h-12 rounded-lg overflow-hidden border-2 transition-all cursor-pointer flex-shrink-0 ${
                         isSelected
-                          ? 'border-[#FF5500] scale-105 shadow-[0_0_12px_rgba(255,85,0,0.4)]'
+                          ? 'border-[#FF5500] scale-105'
                           : 'border-zinc-200 dark:border-zinc-800 opacity-60 hover:opacity-100'
                       }`}
                     >
@@ -271,7 +259,7 @@ export function ProjectDetailPage({
 
                 {/* Big Bold Stat / Number in our Electric Orange */}
                 <div
-                  className="font-heading font-black text-5xl sm:text-6xl lg:text-7xl leading-none mb-3 text-[#FF5500] drop-shadow-[0_2px_14px_rgba(255,85,0,0.25)]"
+                  className="font-heading font-black text-5xl sm:text-6xl lg:text-7xl leading-none mb-3 text-[#FF5500]"
                   style={{ fontStretch: '75%' }}
                 >
                   {metric.value}

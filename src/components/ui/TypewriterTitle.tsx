@@ -99,15 +99,15 @@ export function TypewriterTitle({ className = '', isAuraActive = false }: Typewr
         <span
           className={`text-sm sm:text-base md:text-lg font-bold tracking-tight transition-colors duration-300 ${
             isAuraActive
-              ? 'text-transparent bg-clip-text bg-gradient-to-r from-[#FF5500] via-[#FFAA00] to-[#FF3B00] drop-shadow-[0_0_10px_rgba(255,85,0,0.5)]'
+              ? 'text-transparent bg-clip-text bg-gradient-to-r from-[#FF5500] via-[#FFAA00] to-[#FF3B00]'
               : 'text-zinc-950 font-extrabold'
           }`}
         >
           {displayedText}
         </span>
         <span
-          className={`inline-block w-2 sm:w-2.5 h-4 sm:h-5 ml-1.5 rounded-xs animate-pulse align-middle ${
-            isAuraActive ? 'bg-[#FF5500] shadow-[0_0_8px_#FF5500]' : 'bg-zinc-950'
+          className={`inline-block w-2 sm:w-2.5 h-4 sm:h-5 ml-1.5 rounded-xs align-middle ${
+            isAuraActive ? 'bg-[#FF5500]' : 'bg-zinc-950'
           }`}
         />
       </div>
