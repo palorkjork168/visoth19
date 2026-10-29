@@ -43,15 +43,54 @@ export function HeroSection({ isAuraActive, onAuraToggle, onOpenResume }: HeroSe
       <LensFlareOverlay isAuraActive={isFullAura} />
 
       {/* Top spacing buffer for global floating pill navbar */}
-      <div className="h-24 sm:h-28 lg:h-20 w-full shrink-0 pointer-events-none" />
+      <div className="h-20 sm:h-24 lg:h-20 w-full shrink-0 pointer-events-none" />
 
-      {/* ─── Hero Canvas with Expanded Breathing Room (Name far left, Portrait center, Features far right) ─── */}
-      <div className="relative w-full max-w-[1680px] mx-auto px-5 sm:px-10 lg:px-12 xl:px-16 my-auto flex flex-col lg:flex-row items-center justify-between min-h-[auto] lg:min-h-[780px] xl:min-h-[860px] 2xl:min-h-[920px] gap-8">
+      {/* Subtle Mobile Divider Line directly beneath Navbar (from user wireframe sketch) */}
+      <div className="w-16 h-[1.5px] bg-zinc-200 dark:bg-zinc-800 mx-auto my-1 shrink-0 lg:hidden pointer-events-none" />
+
+      {/* ─── Hero Canvas (Name centered on mobile / left on desktop, Portrait commanding center, Highlights right) ─── */}
+      <div className="relative w-full max-w-[1680px] mx-auto px-4 sm:px-10 lg:px-12 xl:px-16 my-auto flex flex-col lg:flex-row items-center justify-between min-h-[auto] lg:min-h-[780px] xl:min-h-[860px] 2xl:min-h-[920px] gap-6 lg:gap-8">
         
-        {/* ─── LEFT: Big Bold Full Name "CHOU SEREYVISOTH" + Dynamic Animated Title (Pushed Left) ─── */}
-        <div className="relative z-10 flex flex-col justify-center w-full max-w-md lg:max-w-lg xl:max-w-xl pointer-events-none select-none order-1 lg:pl-2 xl:pl-4 animate-fade-up">
+        {/* ─── Top/Left: Name "CHOU SEREYVISOTH" + Dynamic Animated Title ─── */}
+        <div className="relative z-10 flex flex-col items-center lg:items-start justify-center w-full max-w-xl pointer-events-none select-none order-1 text-center lg:text-left mx-auto lg:mx-0 lg:pl-2 xl:pl-4 animate-fade-up">
+          
+          {/* Mobile: Single-line display (from user wireframe request) */}
+          <div className="flex lg:hidden items-center justify-center gap-2 sm:gap-2.5 font-heading font-black tracking-tight text-[clamp(1.5rem,6.8vw,2.5rem)] leading-none text-center">
+            <span className={`transition-colors duration-500 ${isFullAura ? 'text-white' : 'text-black'}`}>CHOU</span>
+            <span className={`transition-colors duration-500 flex items-baseline ${isFullAura ? 'text-white' : 'text-black'}`}>
+              <span>SERE</span>
+              <span
+                className="inline-block transition-all duration-300 select-none"
+                style={{
+                  WebkitTextStroke: isFullAura ? '1.5px #FFFFFF' : '1.5px #000000',
+                  WebkitTextFillColor: 'transparent',
+                  color: 'transparent',
+                }}
+              >
+                Y
+              </span>
+            </span>
+            <span className="text-[#FF5500] flex items-center gap-1.5 sm:gap-2">
+              <span className="flex items-baseline">
+                <span>VISOT</span>
+                <span
+                  className="inline-block transition-all duration-300 select-none"
+                  style={{
+                    WebkitTextStroke: '1.5px #FF5500',
+                    WebkitTextFillColor: 'transparent',
+                    color: 'transparent',
+                  }}
+                >
+                  H
+                </span>
+              </span>
+              <span className="inline-block w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#FF5500]" />
+            </span>
+          </div>
+
+          {/* Desktop: Big multi-line display (preserved) */}
           <div
-            className={`font-heading font-black tracking-tighter text-[clamp(2.75rem,8vw,8.5rem)] leading-[0.88] transition-colors duration-500 ${
+            className={`hidden lg:flex flex-col items-start font-heading font-black tracking-tighter text-[clamp(2.75rem,8vw,8.5rem)] leading-[0.88] transition-colors duration-500 ${
               isFullAura ? 'text-white' : 'text-black'
             }`}
           >
@@ -87,18 +126,24 @@ export function HeroSection({ isAuraActive, onAuraToggle, onOpenResume }: HeroSe
             </div>
           </div>
 
-          {/* Dynamic Animated Typewriter Title (Kept at z-30 for pristine foreground legibility) */}
-          <div className="mt-4 sm:mt-8 pointer-events-auto relative z-30">
+          {/* Dynamic Animated Typewriter Title */}
+          <div className="mt-2.5 sm:mt-4 lg:mt-6 pointer-events-auto relative z-30 flex justify-center lg:justify-start w-full">
             <TypewriterTitle isAuraActive={isFullAura} />
           </div>
         </div>
 
-        {/* ─── CENTER: Portrait Stage + Realistic Back Shadow + WebGL Liquid Reveal ─── */}
-        <div className="relative left-1/2 -translate-x-1/2 lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:bottom-0 w-[420px] xs:w-[480px] sm:w-[580px] md:w-[720px] lg:w-[900px] xl:w-[1040px] 2xl:w-[1160px] h-[390px] xs:h-[440px] sm:h-[500px] md:h-[640px] lg:h-[860px] xl:h-[930px] 2xl:h-[980px] flex items-end justify-center z-20 pointer-events-none order-2 my-2 lg:my-0">
+        {/* ─── CENTER: Portrait Stage (Centered character + Smooth gradient dissipation so flames never cut off) ─── */}
+        <div
+          className="relative left-1/2 translate-x-[calc(-50%+34px)] xs:translate-x-[calc(-50%+40px)] sm:translate-x-[calc(-50%+44px)] lg:left-1/2 lg:-translate-x-1/2 lg:bottom-0 w-[540px] xs:w-[600px] sm:w-[680px] md:w-[760px] lg:w-[900px] xl:w-[1040px] 2xl:w-[1160px] h-[520px] xs:h-[580px] sm:h-[640px] md:h-[700px] lg:h-[860px] xl:h-[930px] 2xl:h-[980px] flex items-end justify-center z-20 pointer-events-none order-2 my-1 sm:my-2 lg:my-0"
+          style={{
+            WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 7%, black 93%, transparent 100%)',
+            maskImage: 'linear-gradient(to bottom, transparent 0%, black 7%, black 93%, transparent 100%)',
+          }}
+        >
           
           {/* 1. Deep Silhouette Back Shadow & Ambient Hellfire Bloom */}
           <div
-            className={`absolute left-1/2 -translate-x-1/2 bottom-3 sm:bottom-4 w-[320px] xs:w-[380px] sm:w-[480px] md:w-[600px] lg:w-[780px] xl:w-[880px] h-[300px] xs:h-[350px] sm:h-[420px] md:h-[540px] lg:h-[660px] xl:h-[740px] rounded-full pointer-events-none transition-all duration-700 blur-[50px] sm:blur-[70px] lg:blur-[90px] ${
+            className={`absolute left-1/2 -translate-x-1/2 bottom-3 sm:bottom-4 w-[400px] xs:w-[460px] sm:w-[540px] md:w-[600px] lg:w-[780px] xl:w-[880px] h-[340px] xs:h-[400px] sm:h-[460px] md:h-[540px] lg:h-[660px] xl:h-[740px] rounded-full pointer-events-none transition-all duration-700 blur-[50px] sm:blur-[70px] lg:blur-[90px] ${
               isFullAura
                 ? 'bg-gradient-to-t from-[#FF2200]/90 via-[#FF7700]/70 to-[#FFAA00]/50 scale-125 opacity-100'
                 : 'bg-black/35 opacity-50 scale-100'
@@ -129,8 +174,8 @@ export function HeroSection({ isAuraActive, onAuraToggle, onOpenResume }: HeroSe
           />
         </div>
 
-        {/* ─── RIGHT: Glassmorphic Project Highlights & 3D Aura Button (Pushed Right) ─── */}
-        <div className="relative z-30 flex flex-col items-start lg:items-end text-left lg:text-right font-mono select-none space-y-3.5 w-full max-w-sm order-3 pointer-events-auto lg:pr-2 xl:pr-4 animate-fade-up-delay-1">
+        {/* ─── Glassmorphic Project Highlights & 3D Aura Button (Centered on mobile, right on desktop) ─── */}
+        <div className="relative z-30 flex flex-col items-center lg:items-end text-left lg:text-right font-mono select-none space-y-3.5 w-full max-w-sm order-3 pointer-events-auto mx-auto lg:mx-0 lg:pr-2 xl:pr-4 animate-fade-up-delay-1 mt-4 lg:mt-0">
           
           {/* Latest project glassmorphic card */}
           <div
@@ -229,7 +274,7 @@ export function HeroSection({ isAuraActive, onAuraToggle, onOpenResume }: HeroSe
           </div>
 
           {/* 3D Tactile Aura Button with rotating flame border */}
-          <div className="pt-2 w-full flex flex-col items-start lg:items-end">
+          <div className="pt-2 w-full flex flex-col items-center lg:items-end">
             <Aura3DButton
               isAuraActive={isFullAura}
               onToggle={toggleFullAura}

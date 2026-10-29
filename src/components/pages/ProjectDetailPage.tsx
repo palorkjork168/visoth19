@@ -278,17 +278,19 @@ export function ProjectDetailPage({
           </div>
         </div>
 
-        {/* ─── Bottom Navigation: Previous / Next Project ─── */}
-        <div className="mt-14 pt-6 border-t border-zinc-200/80 dark:border-zinc-800 flex items-center justify-between font-mono text-xs">
+        {/* ─── Bottom Navigation: Previous / Next Project (Minimalist Icons Only) ─── */}
+        <div className="mt-14 pt-6 border-t border-zinc-200/80 dark:border-zinc-800 flex items-center justify-between">
           {prevProject ? (
             <button
               onClick={() => onSelectProject(prevProject.id)}
-              className={`inline-flex items-center gap-2 font-bold uppercase transition-colors cursor-pointer ${
-                isAuraActive ? 'text-zinc-400 hover:text-white' : 'text-zinc-600 hover:text-black'
+              aria-label="Previous project"
+              className={`group p-3 rounded-full border transition-all cursor-pointer ${
+                isAuraActive
+                  ? 'border-zinc-800 bg-zinc-900/60 hover:border-[#FF5500] hover:bg-zinc-800 text-zinc-300 hover:text-white shadow-sm'
+                  : 'border-zinc-200 bg-zinc-50 hover:border-black hover:bg-zinc-100 text-zinc-700 hover:text-black shadow-xs'
               }`}
             >
-              <ArrowLeft className="w-3.5 h-3.5 text-[#FF5500]" />
-              <span>Prev: {prevProject.title}</span>
+              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1 text-[#FF5500]" />
             </button>
           ) : (
             <div />
@@ -297,12 +299,14 @@ export function ProjectDetailPage({
           {nextProject ? (
             <button
               onClick={() => onSelectProject(nextProject.id)}
-              className={`inline-flex items-center gap-2 font-bold uppercase transition-colors cursor-pointer ${
-                isAuraActive ? 'text-zinc-400 hover:text-white' : 'text-zinc-600 hover:text-black'
+              aria-label="Next project"
+              className={`group p-3 rounded-full border transition-all cursor-pointer ${
+                isAuraActive
+                  ? 'border-zinc-800 bg-zinc-900/60 hover:border-[#FF5500] hover:bg-zinc-800 text-zinc-300 hover:text-white shadow-sm'
+                  : 'border-zinc-200 bg-zinc-50 hover:border-black hover:bg-zinc-100 text-zinc-700 hover:text-black shadow-xs'
               }`}
             >
-              <span>Next: {nextProject.title}</span>
-              <ArrowRight className="w-3.5 h-3.5 text-[#FF5500]" />
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1 text-[#FF5500]" />
             </button>
           ) : (
             <div />

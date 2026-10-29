@@ -163,7 +163,10 @@ export function HellfireFlamesLayer({
 
         // Soft radial gradient for organic flame fluid
         const radGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, curSize);
-        const alpha = (1 - progress) * (mode === 'back' ? 0.42 : 0.48);
+        // Organic vertical dissipation near the top of canvas so flames never hit a sharp ceiling cut
+        const topFade = Math.max(0, Math.min(1, (p.y - 15) / (h * 0.20)));
+        const alpha = (1 - progress) * (mode === 'back' ? 0.42 : 0.48) * topFade;
+        if (alpha <= 0.01) continue;
 
         if (progress < 0.28) {
           // White-hot core & yellow flame body

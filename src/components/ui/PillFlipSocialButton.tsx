@@ -23,10 +23,8 @@ export const PillFlipSocialButton: React.FC<PillFlipSocialButtonProps> = ({
   className = '',
 }) => {
   const buttonRef = useRef<HTMLAnchorElement>(null);
-  const iconRef = useRef<HTMLDivElement>(null);
   const circleRef = useRef<HTMLSpanElement>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
-  const iconTweenRef = useRef<gsap.core.Tween | null>(null);
 
   const activeAccent = accentColor || (isAuraActive ? '#FF5500' : '#18181B');
 
@@ -37,8 +35,8 @@ export const PillFlipSocialButton: React.FC<PillFlipSocialButtonProps> = ({
 
     const setupCircle = () => {
       const rect = btn.getBoundingClientRect();
-      const w = rect.width || 48;
-      const h = rect.height || 48;
+      const w = rect.width || 56;
+      const h = rect.height || 56;
 
       // Calculate radius for expanding circle to smoothly cover the button from bottom
       const R = ((w * w) / 4 + h * h) / (2 * h);
@@ -63,7 +61,7 @@ export const PillFlipSocialButton: React.FC<PillFlipSocialButtonProps> = ({
         {
           scale: 1.25,
           xPercent: -50,
-          duration: 0.5,
+          duration: 0.45,
           ease: 'power3.out',
           overwrite: 'auto',
         },
@@ -75,40 +73,18 @@ export const PillFlipSocialButton: React.FC<PillFlipSocialButtonProps> = ({
 
     setupCircle();
     window.addEventListener('resize', setupCircle);
-    return () => window.removeEventListener('resize', setupCircle);
+
+    return () => {
+      window.removeEventListener('resize', setupCircle);
+    };
   }, []);
 
   const handleMouseEnter = () => {
-    // 1. Rising background circle animation from PillNav
     tlRef.current?.play();
-
-    // 2. Flip / 360 Elastic rotation on the icon from PillNav handleLogoEnter
-    if (iconRef.current) {
-      iconTweenRef.current?.kill();
-      iconTweenRef.current = gsap.to(iconRef.current, {
-        rotate: 360,
-        scale: 1.18,
-        duration: 0.85,
-        ease: 'elastic.out(1, 0.45)',
-        overwrite: 'auto',
-        onComplete: () => {
-          gsap.set(iconRef.current, { rotate: 0, scale: 1.1 });
-        },
-      });
-    }
   };
 
   const handleMouseLeave = () => {
     tlRef.current?.reverse();
-    if (iconRef.current) {
-      iconTweenRef.current?.kill();
-      gsap.to(iconRef.current, {
-        scale: 1,
-        rotate: 0,
-        duration: 0.3,
-        ease: 'power2.out',
-      });
-    }
   };
 
   return (
@@ -120,16 +96,36 @@ export const PillFlipSocialButton: React.FC<PillFlipSocialButtonProps> = ({
       aria-label={ariaLabel}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative w-13 h-13 sm:w-14 sm:h-14 rounded-full border flex items-center justify-center overflow-hidden transition-all duration-300 shadow-sm cursor-pointer select-none group active:scale-95 ${
+      className={`relative w-13 h-13 sm:w-14 sm:h-14 rounded-full flex items-center justify-center overflow-hidden transition-all duration-300 shadow-sm cursor-pointer select-none group active:scale-95 ${
         isAuraActive
-          ? 'border-zinc-800 bg-zinc-900/90 text-zinc-300 hover:text-white hover:border-orange-500/60 hover:shadow-[0_0_20px_rgba(255,85,0,0.35)]'
-          : 'border-zinc-300 bg-white text-zinc-700 hover:text-white hover:border-black hover:shadow-md'
+          ? 'text-zinc-200 hover:text-white'
+          : 'text-zinc-700 hover:text-white'
       } ${className}`}
     >
-      {/* ─── Rising Background Circle (PillNav style) ─── */}
+      {/* ─── Continuous Smooth Rotating Gradient Border (Always Animated) ─── */}
+      <span
+        className="absolute -inset-[2px] rounded-full pointer-events-none transition-opacity duration-300"
+        style={{
+          background: isAuraActive
+            ? 'conic-gradient(from 0deg, transparent 0deg, #FF3300 90deg, #FFAA00 180deg, #FF3300 270deg, transparent 360deg)'
+            : `conic-gradient(from 0deg, transparent 0deg, ${activeAccent} 180deg, transparent 360deg)`,
+          animation: 'spin-continuous 6s linear infinite',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* ─── Inner Button Face Container ─── */}
+      <span
+        className={`absolute inset-[1.5px] rounded-full z-[1] transition-colors duration-300 ${
+          isAuraActive ? 'bg-[#111218]' : 'bg-white'
+        }`}
+        aria-hidden="true"
+      />
+
+      {/* ─── Rising Background Fill on Hover ─── */}
       <span
         ref={circleRef}
-        className="pointer-events-none absolute left-1/2 bottom-0 rounded-full z-[1] block transition-colors duration-300"
+        className="pointer-events-none absolute left-1/2 bottom-0 rounded-full z-[2] block transition-colors duration-300"
         style={{
           background: isAuraActive
             ? 'linear-gradient(135deg, #FF4500, #FF6600)'
@@ -140,11 +136,13 @@ export const PillFlipSocialButton: React.FC<PillFlipSocialButtonProps> = ({
         aria-hidden="true"
       />
 
-      {/* ─── Flipping Icon Container ─── */}
+      {/* ─── Always Continuously Spinning Icon (Not too fast, not too slow) ─── */}
       <div
-        ref={iconRef}
-        className="relative z-[2] flex items-center justify-center transition-transform pointer-events-none"
-        style={{ willChange: 'transform' }}
+        className="relative z-[3] flex items-center justify-center pointer-events-none animate-spin-continuous"
+        style={{
+          transformOrigin: '50% 50%',
+          willChange: 'transform',
+        }}
       >
         {children}
       </div>

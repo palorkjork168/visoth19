@@ -91,6 +91,12 @@ const fragmentShader = `
     
     color.rgb += uGlow * glow;
     color.a = max(color.a, glow);
+
+    // Organic dissipation fade at top boundary so flames seamlessly dissolve without any hard box cutoff
+    float topFade = smoothstep(1.0, 0.88, st.y);
+    float bottomFade = smoothstep(0.0, 0.03, st.y);
+    color *= (topFade * bottomFade);
+
     gl_FragColor = color;
   }
 `;

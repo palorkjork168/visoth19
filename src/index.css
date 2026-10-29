@@ -274,5 +274,26 @@ h1.font-sans, h2.font-sans, h3.font-sans, h4.font-sans, h5.font-sans, h6.font-sa
   animation: border-spin 2.2s linear infinite;
 }
 
+/* ─── Continuous Smooth Spinning Animations ───────────────── */
+@keyframes spin-continuous {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-continuous {
+  animation: spin-continuous 7s linear infinite;
+  transform-origin: center center;
+}
+
+.animate-spin-continuous-slow {
+  animation: spin-continuous 9s linear infinite;
+  transform-origin: center center;
+}
+
+
 
 
